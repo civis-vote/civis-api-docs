@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is Civs' REST API documentation
+  version: "1.0.0"
+  title: Civis
+  termsOfService: 'https://www.civis.vote/terms'
+  contact:
+    email: mkv@commutatus.com
+  license:
+    name: MIT
+    url: 'https://github.com/civis-vote/civis-api/blob/develop/LICENSE'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mikevic/Civis/1.0.0
+tags:
+  - name: consultation
+    description: Consultation is a document that an organisation requires public or private feedback on
+paths:
+  /consultations:
+    get:
+      tags:
+        - consultation
+      summary: List Consultations
+      operationId: listConsultations
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Consultation'
+      description: Get a list of consultations
+    post:
+      tags:
+        - consultation
+      summary: Create Consultation
+      operationId: createConsultation
+      requestBody:
+        $ref: '#/components/requestBodies/Consultation'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consultation'
+components:
+  schemas:
+    Consultation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+          description: Title of the consultation
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          $ref: '#/components/schemas/UserPublicProfile'
+        is_featured:
+          type: boolean
+        summary:
+          type: string
+    UserPublicProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        last_name:
+          type: string
+        profile_picture:
+          type: string
+          format: uri
+  requestBodies:
+    Consultation:
+      description: "Consultation input object"
+      content: 
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              summary:
+                type: string
