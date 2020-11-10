@@ -20,6 +20,9 @@
   "tags" : [ {
     "name" : "consultation",
     "description" : "A document that an organisation requires public or private feedback on"
+  }, {
+    "name" : "ministry",
+    "description" : "A government department that can launch multiple consultations"
   } ],
   "paths" : {
     "/consultations" : {
@@ -64,6 +67,187 @@
           }
         }
       }
+    },
+    "/consultations/{ConsultationId}" : {
+      "get" : {
+        "tags" : [ "consultation" ],
+        "summary" : "Get a consultation",
+        "operationId" : "getConsultation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "ConsultationId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Consultation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "consultation" ],
+        "summary" : "Update a consultation",
+        "operationId" : "updateConsultation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "ConsultationId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Consultation"
+        },
+        "responses" : {
+          "202" : {
+            "description" : "updates have been accepted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Consultation"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to update consultation"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "consultation" ],
+        "summary" : "Delete a consultation",
+        "operationId" : "deleteConsultation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "ConsultationId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "202" : {
+            "description" : "consultation queued for deletion"
+          },
+          "401" : {
+            "description" : "user does not have permission to update consultation"
+          }
+        }
+      }
+    },
+    "/consultations/{ConsultationId}/publish" : {
+      "post" : {
+        "tags" : [ "consultation" ],
+        "summary" : "Publish a consultation",
+        "operationId" : "publishConsultation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "ConsultationId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "consultation published",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Consultation"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to publish a consultation"
+          }
+        }
+      }
+    },
+    "/consultations/{ConsultationId}/reject" : {
+      "post" : {
+        "tags" : [ "consultation" ],
+        "summary" : "Reject a consultation",
+        "operationId" : "rejectConsultation",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "ConsultationId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "consultation rejected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Consultation"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to reject a consultation"
+          }
+        }
+      }
+    },
+    "/ministries" : {
+      "get" : {
+        "tags" : [ "ministry" ],
+        "summary" : "List ministries",
+        "operationId" : "listMinistries",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Ministry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Create a ministry",
+        "operationId" : "createMinistry",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Ministry"
+        },
+        "responses" : {
+          "201" : {
+            "description" : "created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Ministry"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -89,8 +273,37 @@
           "is_featured" : {
             "type" : "boolean"
           },
+          "status" : {
+            "$ref" : "#/components/schemas/ConsultationStatus"
+          },
           "summary" : {
             "type" : "string"
+          }
+        }
+      },
+      "Ministry" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the ministry"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "level" : {
+            "$ref" : "#/components/schemas/MinistryLevel"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/MinistryStatus"
           }
         }
       },
@@ -112,6 +325,18 @@
             "format" : "uri"
           }
         }
+      },
+      "MinistryStatus" : {
+        "type" : "string",
+        "enum" : [ "approved", "rejected", "in_reivew" ]
+      },
+      "MinistryLevel" : {
+        "type" : "string",
+        "enum" : [ "local", "state", "national" ]
+      },
+      "ConsultationStatus" : {
+        "type" : "string",
+        "enum" : [ "draft", "active", "rejected", "closed" ]
       }
     },
     "requestBodies" : {
@@ -123,6 +348,24 @@
               "type" : "object",
               "properties" : {
                 "title" : {
+                  "type" : "string"
+                },
+                "summary" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Ministry" : {
+        "description" : "Ministry input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "name" : {
                   "type" : "string"
                 },
                 "summary" : {
