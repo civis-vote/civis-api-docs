@@ -21,6 +21,9 @@
     "name" : "consultation",
     "description" : "A document that an organisation requires public or private feedback on"
   }, {
+    "name" : "response",
+    "description" : "A response is feedback to a consultation"
+  }, {
     "name" : "ministry",
     "description" : "A government department that can launch multiple consultations"
   } ],
@@ -142,7 +145,7 @@
             "description" : "consultation queued for deletion"
           },
           "401" : {
-            "description" : "user does not have permission to update consultation"
+            "description" : "user does not have permission to delete consultation"
           }
         }
       }
@@ -203,6 +206,28 @@
           },
           "401" : {
             "description" : "user does not have permission to reject a consultation"
+          }
+        }
+      }
+    },
+    "/responses" : {
+      "get" : {
+        "tags" : [ "response" ],
+        "summary" : "List responses",
+        "operationId" : "listResponses",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Response"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -302,7 +327,7 @@
             }
           },
           "401" : {
-            "description" : "user does not have permission to update consultation"
+            "description" : "user does not have permission to update ministry"
           }
         }
       },
@@ -323,7 +348,67 @@
             "description" : "consultation queued for deletion"
           },
           "401" : {
-            "description" : "user does not have permission to update consultation"
+            "description" : "user does not have permission to delete ministry"
+          }
+        }
+      }
+    },
+    "/ministries/{MinistryId}/publish" : {
+      "post" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Publish a ministry",
+        "operationId" : "publishMinistry",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "MinistryId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ministry published",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Ministry"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to publish a ministry"
+          }
+        }
+      }
+    },
+    "/ministry/{MinistryId}/reject" : {
+      "post" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Reject a ministry",
+        "operationId" : "rejectMinistry",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "MinistryId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ministry rejected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Ministry"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to reject a ministry"
           }
         }
       }
@@ -369,6 +454,40 @@
           },
           "status" : {
             "$ref" : "#/components/schemas/ConsultationStatus"
+          },
+          "summary" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Response" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "consultation_id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "ID of the consultation associated with this response"
+          },
+          "user_id" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "ID of the user associated with this response"
+          },
+          "published_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "rejected_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "response_deadline" : {
+            "type" : "string",
+            "format" : "date-time"
           },
           "summary" : {
             "type" : "string"
