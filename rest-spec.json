@@ -248,6 +248,85 @@
           }
         }
       }
+    },
+    "/ministries/{MinistryId}" : {
+      "get" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Get a ministry",
+        "operationId" : "getMinistry",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "MinistryId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Ministry"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Update a ministry",
+        "operationId" : "updateMinistry",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "MinistryId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Consultation"
+        },
+        "responses" : {
+          "202" : {
+            "description" : "updates have been accepted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Consultation"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "user does not have permission to update consultation"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ministry" ],
+        "summary" : "Delete a ministry",
+        "operationId" : "deleteMinistry",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "MinistryId",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "202" : {
+            "description" : "consultation queued for deletion"
+          },
+          "401" : {
+            "description" : "user does not have permission to update consultation"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -269,6 +348,21 @@
           },
           "created_by" : {
             "$ref" : "#/components/schemas/UserPublicProfile"
+          },
+          "published_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "rejected_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "response_deadline" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "ministry" : {
+            "$ref" : "#/components/schemas/Ministry"
           },
           "is_featured" : {
             "type" : "boolean"
