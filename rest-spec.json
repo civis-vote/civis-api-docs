@@ -28,11 +28,14 @@
     "description" : "A government department that can launch multiple consultations."
   } ],
   "paths" : {
-    "/consultations" : {
-      "get" : {
+    "/consultations/_search" : {
+      "post" : {
         "tags" : [ "consultation" ],
         "summary" : "List consultations",
         "operationId" : "listConsultations",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationSearch"
+        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -49,7 +52,9 @@
           }
         },
         "description" : "Get a list of consultations"
-      },
+      }
+    },
+    "/consultations/_create" : {
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Create a consultation",
@@ -71,44 +76,11 @@
         }
       }
     },
-    "/consultations/{ConsultationId}" : {
-      "get" : {
-        "tags" : [ "consultation" ],
-        "summary" : "Get a consultation",
-        "operationId" : "getConsultation",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "ConsultationId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch" : {
+    "/consultations/_update" : {
+      "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Update a consultation",
         "operationId" : "updateConsultation",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "ConsultationId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Consultation"
         },
@@ -127,19 +99,13 @@
             "description" : "user does not have permission to update consultation"
           }
         }
-      },
-      "delete" : {
+      }
+    },
+    "/consultations/_delete" : {
+      "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Delete a consultation",
         "operationId" : "deleteConsultation",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "ConsultationId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
         "responses" : {
           "202" : {
             "description" : "consultation queued for deletion"
@@ -150,19 +116,11 @@
         }
       }
     },
-    "/consultations/{ConsultationId}/publish" : {
+    "/consultations/_publish" : {
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Publish a consultation",
         "operationId" : "publishConsultation",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "ConsultationId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
         "responses" : {
           "200" : {
             "description" : "consultation published",
@@ -180,19 +138,11 @@
         }
       }
     },
-    "/consultations/{ConsultationId}/reject" : {
+    "/consultations/_reject" : {
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Reject a consultation",
         "operationId" : "rejectConsultation",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "ConsultationId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
         "responses" : {
           "200" : {
             "description" : "consultation rejected",
@@ -558,6 +508,19 @@
         "content" : {
           "application/json" : {
             "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/requestBodies/ConsultationInputBase"
+              }
+            }
+          }
+        }
+      },
+      "ConsultationInputBase" : {
+        "description" : "Base object to create a consultation",
+        "content" : {
+          "application/json" : {
+            "schema" : {
               "type" : "object",
               "properties" : {
                 "title" : {
@@ -565,6 +528,41 @@
                 },
                 "summary" : {
                   "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConsultationSearch" : {
+        "description" : "Consultation search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "filters" : {
+                  "type" : "object",
+                  "properties" : {
+                    "status" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/ConsultationStatus"
+                      }
+                    },
+                    "id" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "integer"
+                      }
+                    },
+                    "ministry_id" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "integer"
+                      }
+                    }
+                  }
                 }
               }
             }
