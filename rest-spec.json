@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "description" : "This is Civs' REST API documentation\n",
-    "version" : "1.0.0",
+    "version" : "1.0.1",
     "title" : "Civis",
     "termsOfService" : "https://www.civis.vote/terms",
     "contact" : {
@@ -15,7 +15,7 @@
   },
   "servers" : [ {
     "description" : "SwaggerHub API Auto Mocking",
-    "url" : "https://virtserver.swaggerhub.com/mikevic/Civis/1.0.0"
+    "url" : "https://virtserver.swaggerhub.com/mikevic/Civis/1.0.1"
   } ],
   "tags" : [ {
     "name" : "consultation",
