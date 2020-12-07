@@ -68,7 +68,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Consultation"
+                  }
                 }
               }
             }
@@ -90,7 +93,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Consultation"
+                  }
                 }
               }
             }
@@ -106,6 +112,9 @@
         "tags" : [ "consultation" ],
         "summary" : "Delete a consultation",
         "operationId" : "deleteConsultation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/IdArray"
+        },
         "responses" : {
           "202" : {
             "description" : "consultation queued for deletion"
@@ -121,13 +130,19 @@
         "tags" : [ "consultation" ],
         "summary" : "Publish a consultation",
         "operationId" : "publishConsultation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/IdArray"
+        },
         "responses" : {
           "200" : {
             "description" : "consultation published",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Consultation"
+                  }
                 }
               }
             }
@@ -143,13 +158,19 @@
         "tags" : [ "consultation" ],
         "summary" : "Reject a consultation",
         "operationId" : "rejectConsultation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/IdArray"
+        },
         "responses" : {
           "200" : {
             "description" : "consultation rejected",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Consultation"
+                  }
                 }
               }
             }
@@ -503,6 +524,19 @@
       }
     },
     "requestBodies" : {
+      "IdArray" : {
+        "description" : "An array of IDs for the intended operation",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      },
       "Consultation" : {
         "description" : "Consultation input object",
         "content" : {
@@ -510,24 +544,14 @@
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/components/requestBodies/ConsultationInputBase"
-              }
-            }
-          }
-        }
-      },
-      "ConsultationInputBase" : {
-        "description" : "Base object to create a consultation",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "type" : "object",
-              "properties" : {
-                "title" : {
-                  "type" : "string"
-                },
-                "summary" : {
-                  "type" : "string"
+                "type" : "object",
+                "properties" : {
+                  "title" : {
+                    "type" : "string"
+                  },
+                  "summary" : {
+                    "type" : "string"
+                  }
                 }
               }
             }
