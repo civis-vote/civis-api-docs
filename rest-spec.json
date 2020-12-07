@@ -49,6 +49,16 @@
                 }
               }
             }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "description" : "Get a list of consultations"
@@ -57,13 +67,13 @@
     "/consultations/_create" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Create a consultation",
+        "summary" : "Create a set consultations",
         "operationId" : "createConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Consultation"
         },
         "responses" : {
-          "201" : {
+          "200" : {
             "description" : "created",
             "content" : {
               "application/json" : {
@@ -75,6 +85,16 @@
                 }
               }
             }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -82,13 +102,13 @@
     "/consultations/_update" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Update a consultation",
+        "summary" : "Update a set of consultations",
         "operationId" : "updateConsultation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/Consultation"
+          "$ref" : "#/components/requestBodies/ConsultationUpdate"
         },
         "responses" : {
-          "202" : {
+          "200" : {
             "description" : "updates have been accepted",
             "content" : {
               "application/json" : {
@@ -101,8 +121,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to update consultation"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -110,17 +137,24 @@
     "/consultations/_delete" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Delete a consultation",
+        "summary" : "Delete a set of consultations",
         "operationId" : "deleteConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
         },
         "responses" : {
-          "202" : {
+          "200" : {
             "description" : "consultation queued for deletion"
           },
-          "401" : {
-            "description" : "user does not have permission to delete consultation"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -128,14 +162,14 @@
     "/consultations/_publish" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Publish a consultation",
+        "summary" : "Publish a set of consultations",
         "operationId" : "publishConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
         },
         "responses" : {
           "200" : {
-            "description" : "consultation published",
+            "description" : "consultations published",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -147,8 +181,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to publish a consultation"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -156,7 +197,7 @@
     "/consultations/_reject" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Reject a consultation",
+        "summary" : "Reject a set of consultations",
         "operationId" : "rejectConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
@@ -175,8 +216,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to reject a consultation"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -521,6 +569,23 @@
       "ConsultationStatus" : {
         "type" : "string",
         "enum" : [ "draft", "active", "rejected", "closed" ]
+      },
+      "Error" : {
+        "description" : "In case of any failure during processing of the requests server is required to return the error object. It is recommended taht error codes are namespaced error codes taht can provide contexual information about the error just by examining the code, e.g. origin.badlocation.\nIn case debug is permitted for a certain role, api client has indicated the need to get the debug information during the call and server is configured to honor the debug infromation request - it is recommended that highly detailed ifnormation about the problem (along with complete stack trace) is provided to the api client.",
+        "required" : [ "code", "message" ],
+        "type" : "object",
+        "readOnly" : true,
+        "properties" : {
+          "code" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "debugDetail" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "requestBodies" : {
@@ -538,7 +603,7 @@
         }
       },
       "Consultation" : {
-        "description" : "Consultation input object",
+        "description" : "Consultation create object",
         "content" : {
           "application/json" : {
             "schema" : {
@@ -546,6 +611,30 @@
               "items" : {
                 "type" : "object",
                 "properties" : {
+                  "title" : {
+                    "type" : "string"
+                  },
+                  "summary" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConsultationUpdate" : {
+        "description" : "Consultation update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer"
+                  },
                   "title" : {
                     "type" : "string"
                   },
