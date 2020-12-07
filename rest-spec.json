@@ -67,7 +67,7 @@
     "/consultations/_create" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Create a set consultations",
+        "summary" : "Create consultation/s",
         "operationId" : "createConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Consultation"
@@ -102,7 +102,7 @@
     "/consultations/_update" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Update a set of consultations",
+        "summary" : "Update consultation/s",
         "operationId" : "updateConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/ConsultationUpdate"
@@ -137,7 +137,7 @@
     "/consultations/_delete" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Delete a set of consultations",
+        "summary" : "Delete consultation/s",
         "operationId" : "deleteConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
@@ -162,7 +162,7 @@
     "/consultations/_publish" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Publish a set of consultations",
+        "summary" : "Publish consultation/s",
         "operationId" : "publishConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
@@ -197,7 +197,7 @@
     "/consultations/_reject" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Reject a set of consultations",
+        "summary" : "Reject consultation/s",
         "operationId" : "rejectConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/IdArray"
