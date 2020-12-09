@@ -70,7 +70,7 @@
     "/consultations/_create" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Create consultation/s",
+        "summary" : "Create consultation",
         "operationId" : "createConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Consultation"
@@ -105,7 +105,7 @@
     "/consultations/_update" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Update consultation/s",
+        "summary" : "Update consultation",
         "operationId" : "updateConsultation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/ConsultationUpdate"
@@ -116,7 +116,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
+                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
@@ -140,10 +140,10 @@
     "/consultations/_delete" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Delete consultation/s",
+        "summary" : "Delete consultation",
         "operationId" : "deleteConsultation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/IdArray"
+          "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
@@ -165,18 +165,18 @@
     "/consultations/_publish" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Publish consultation/s",
+        "summary" : "Publish consultation",
         "operationId" : "publishConsultation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/IdArray"
+          "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
-            "description" : "consultations published",
+            "description" : "consultation published",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
+                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
@@ -200,10 +200,10 @@
     "/consultations/_reject" : {
       "post" : {
         "tags" : [ "consultation" ],
-        "summary" : "Reject consultation/s",
+        "summary" : "Reject consultation",
         "operationId" : "rejectConsultation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/IdArray"
+          "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
@@ -211,7 +211,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
+                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
@@ -592,12 +592,12 @@
       }
     },
     "requestBodies" : {
-      "IdArray" : {
-        "description" : "An array of IDs for the intended operation",
+      "Id" : {
+        "description" : "Record ID for the intended operation",
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "array",
+              "type" : "object",
               "items" : {
                 "type" : "integer"
               }
@@ -628,19 +628,16 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "id" : {
-                    "type" : "integer"
-                  },
-                  "title" : {
-                    "type" : "string"
-                  },
-                  "summary" : {
-                    "type" : "string"
-                  }
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "title" : {
+                  "type" : "string"
+                },
+                "summary" : {
+                  "type" : "string"
                 }
               }
             }
