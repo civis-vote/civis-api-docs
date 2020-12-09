@@ -254,8 +254,8 @@
         }
       }
     },
-    "/ministries" : {
-      "get" : {
+    "/ministries/_list" : {
+      "post" : {
         "tags" : [ "ministry" ],
         "summary" : "List ministries",
         "operationId" : "listMinistries",
@@ -274,7 +274,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/ministries/_create" : {
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Create a ministry",
@@ -296,19 +298,14 @@
         }
       }
     },
-    "/ministries/{MinistryId}" : {
-      "get" : {
+    "/ministries/_get" : {
+      "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Get a ministry",
         "operationId" : "getMinistry",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "MinistryId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -321,19 +318,13 @@
             }
           }
         }
-      },
-      "patch" : {
+      }
+    },
+    "/ministries/_update" : {
+      "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Update a ministry",
         "operationId" : "updateMinistry",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "MinistryId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Ministry"
         },
@@ -352,19 +343,16 @@
             "description" : "user does not have permission to update ministry"
           }
         }
-      },
-      "delete" : {
+      }
+    },
+    "/ministries/_delete" : {
+      "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Delete a ministry",
         "operationId" : "deleteMinistry",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "MinistryId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
         "responses" : {
           "202" : {
             "description" : "consultation queued for deletion"
@@ -375,19 +363,14 @@
         }
       }
     },
-    "/ministries/{MinistryId}/publish" : {
+    "/ministries/_publish" : {
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Publish a ministry",
         "operationId" : "publishMinistry",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "MinistryId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
         "responses" : {
           "200" : {
             "description" : "ministry published",
@@ -405,19 +388,14 @@
         }
       }
     },
-    "/ministry/{MinistryId}/reject" : {
+    "/ministry/_reject" : {
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Reject a ministry",
         "operationId" : "rejectMinistry",
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "MinistryId",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true
-        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
         "responses" : {
           "200" : {
             "description" : "ministry rejected",
