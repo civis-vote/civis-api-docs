@@ -15,6 +15,9 @@
   },
   "servers" : [ {
     "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/Civis/Civis/1.0.1"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
     "url" : "https://virtserver.swaggerhub.com/mikevic/Civis/1.0.1"
   } ],
   "tags" : [ {
@@ -78,7 +81,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
+                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
@@ -607,16 +610,13 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "type" : "object",
-                "properties" : {
-                  "title" : {
-                    "type" : "string"
-                  },
-                  "summary" : {
-                    "type" : "string"
-                  }
+              "type" : "object",
+              "properties" : {
+                "title" : {
+                  "type" : "string"
+                },
+                "summary" : {
+                  "type" : "string"
                 }
               }
             }
