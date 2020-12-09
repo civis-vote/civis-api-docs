@@ -457,6 +457,12 @@
           },
           "summary" : {
             "type" : "string"
+          },
+          "visibility" : {
+            "$ref" : "#/components/schemas/VisibilityLevel"
+          },
+          "consultation_category" : {
+            "$ref" : "#/components/schemas/ConsultationCategory"
           }
         }
       },
@@ -551,6 +557,14 @@
         "type" : "string",
         "enum" : [ "draft", "active", "rejected", "closed" ]
       },
+      "ConsultationCategory" : {
+        "type" : "string",
+        "enum" : [ "fresh", "amendment_policy", "rule" ]
+      },
+      "VisibilityLevel" : {
+        "type" : "string",
+        "enum" : [ "public", "private" ]
+      },
       "Error" : {
         "description" : "In case of any failure during processing of the requests server is required to return the error object. It is recommended taht error codes are namespaced error codes taht can provide contexual information about the error just by examining the code, e.g. origin.badlocation.\nIn case debug is permitted for a certain role, api client has indicated the need to get the debug information during the call and server is configured to honor the debug infromation request - it is recommended that highly detailed ifnormation about the problem (along with complete stack trace) is provided to the api client.",
         "required" : [ "code", "message" ],
@@ -595,6 +609,12 @@
                 },
                 "summary" : {
                   "type" : "string"
+                },
+                "visibility_level" : {
+                  "type" : "string"
+                },
+                "consultation_category" : {
+                  "type" : "string"
                 }
               }
             }
@@ -615,6 +635,9 @@
                   "type" : "string"
                 },
                 "summary" : {
+                  "type" : "string"
+                },
+                "visibility_level" : {
                   "type" : "string"
                 }
               }
