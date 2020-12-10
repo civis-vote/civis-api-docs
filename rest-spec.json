@@ -460,6 +460,108 @@
           }
         }
       }
+    },
+    "/master_reference_data/_list" : {
+      "post" : {
+        "tags" : [ "master_reference_data" ],
+        "summary" : "List master reference data",
+        "operationId" : "listMasterReferenceData",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/MasterReferenceDataSearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MasterReferenceData"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/master_reference_data/_create" : {
+      "post" : {
+        "tags" : [ "master_reference_data" ],
+        "summary" : "Create a master reference data",
+        "operationId" : "createMasterReferenceData",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/MasterReferenceData"
+        },
+        "responses" : {
+          "201" : {
+            "description" : "created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MasterReferenceData"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/master_reference_data/_update" : {
+      "post" : {
+        "tags" : [ "master_reference_data" ],
+        "summary" : "Update master_reference_data",
+        "operationId" : "updateMasterReferenceData",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/MasterReferenceDataUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "updates have been accepted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MasterReferenceData"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -556,6 +658,26 @@
           }
         }
       },
+      "MasterReferenceData" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the reference data"
+          },
+          "reference_data_type" : {
+            "$ref" : "#/components/schemas/ReferenceDataType"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "Ministry" : {
         "type" : "object",
         "properties" : {
@@ -619,6 +741,10 @@
       "ConsultationCategory" : {
         "type" : "string",
         "enum" : [ "fresh", "amendment_policy", "rule" ]
+      },
+      "ReferenceDataType" : {
+        "type" : "string",
+        "enum" : [ "val1", "val1" ]
       },
       "VisibilityLevel" : {
         "type" : "string",
@@ -735,6 +861,68 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "MasterReferenceData" : {
+        "description" : "Master reference data create object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "name" : {
+                  "type" : "string"
+                },
+                "reference_data_type" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "MasterReferenceDataSearch" : {
+        "description" : "Master reference data search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "filters" : {
+                  "type" : "object",
+                  "properties" : {
+                    "reference_data_type" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/ReferenceDataType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "MasterReferenceDataUpdate" : {
+        "description" : "Master reference data update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "name" : {
+                  "type" : "string"
+                },
+                "reference_data_type" : {
+                  "type" : "string"
                 }
               }
             }
