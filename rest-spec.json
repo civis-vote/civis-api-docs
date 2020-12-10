@@ -272,6 +272,16 @@
                 }
               }
             }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -316,6 +326,16 @@
                 }
               }
             }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -329,7 +349,7 @@
           "$ref" : "#/components/requestBodies/Ministry"
         },
         "responses" : {
-          "202" : {
+          "200" : {
             "description" : "updates have been accepted",
             "content" : {
               "application/json" : {
@@ -339,8 +359,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to update ministry"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -354,11 +381,18 @@
           "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
-          "202" : {
+          "200" : {
             "description" : "consultation queued for deletion"
           },
-          "401" : {
-            "description" : "user does not have permission to delete ministry"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -382,8 +416,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to publish a ministry"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -407,8 +448,15 @@
               }
             }
           },
-          "401" : {
-            "description" : "user does not have permission to reject a ministry"
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -590,8 +638,10 @@
           "application/json" : {
             "schema" : {
               "type" : "object",
-              "items" : {
-                "type" : "integer"
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                }
               }
             }
           }
