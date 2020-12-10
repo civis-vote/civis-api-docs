@@ -232,21 +232,161 @@
         }
       }
     },
-    "/responses" : {
-      "get" : {
-        "tags" : [ "response" ],
-        "summary" : "List responses",
-        "operationId" : "listResponses",
+    "/consultation_responses/_search" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "List consultation responses",
+        "operationId" : "listConsultationResponses",
         "responses" : {
           "200" : {
-            "description" : "successful operation",
+            "description" : "list consultation response",
             "content" : {
               "application/json" : {
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/Response"
+                    "$ref" : "#/components/schemas/ConsultationResponse"
                   }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultation_responses/_create" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "Create consultation response",
+        "operationId" : "createConsultationResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationResponse"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ConsultationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultation_responses/_update" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "Update consultation response",
+        "operationId" : "updateConsultationResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationResponseUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "updates have been accepted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Consultation"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultation_responses/_delete" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "Delete consultation response",
+        "operationId" : "deleteConsultationResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "consultation response queued for deletion"
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/consultation_responses/_submit" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "Submit consultation",
+        "operationId" : "submitConsultation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "consultation submitted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ConsultationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
                 }
               }
             }
@@ -748,37 +888,41 @@
           }
         }
       },
-      "Response" : {
+      "ConsultationResponse" : {
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "consultation_id" : {
-            "type" : "integer",
-            "format" : "int64",
-            "description" : "ID of the consultation associated with this response"
+          "consultation" : {
+            "$ref" : "#/components/schemas/Consultation"
           },
-          "user_id" : {
-            "type" : "integer",
-            "format" : "int64",
-            "description" : "ID of the user associated with this response"
-          },
-          "published_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "rejected_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "response_deadline" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "summary" : {
+          "response_content" : {
             "type" : "string"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/UserPublicProfile"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/ConsultationResponseStatus"
+          },
+          "visibility" : {
+            "$ref" : "#/components/schemas/ConsultationResponseVisibility"
+          },
+          "satisfaction_rating" : {
+            "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
+          },
+          "consultation_response_template_id" : {
+            "type" : "integer"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "submitted_at" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },
@@ -885,6 +1029,18 @@
       "ConsultationCategory" : {
         "type" : "string",
         "enum" : [ "fresh", "amendment_policy", "rule" ]
+      },
+      "ConsultationResponseStatus" : {
+        "type" : "string",
+        "enum" : [ "draft", "submitted" ]
+      },
+      "ConsultationResponseVisibility" : {
+        "type" : "string",
+        "enum" : [ "shared", "anonymous" ]
+      },
+      "ConsultationResponseSatisfactionRating" : {
+        "type" : "string",
+        "enum" : [ "dissatisfied", "somewhat_dissatisfied", "somewhat_satisfied", "satisfied" ]
       },
       "LocationType" : {
         "type" : "string",
@@ -1009,6 +1165,69 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConsultationResponse" : {
+        "description" : "Consultation response create object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "consultation_id" : {
+                  "type" : "integer"
+                },
+                "response_content" : {
+                  "type" : "string"
+                },
+                "status" : {
+                  "type" : "string"
+                },
+                "satisfaction_rating" : {
+                  "type" : "string"
+                },
+                "visibility" : {
+                  "type" : "string"
+                },
+                "consultation_response_template_id" : {
+                  "type" : "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConsultationResponseUpdate" : {
+        "description" : "Consultation response update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "consultation_id" : {
+                  "type" : "integer"
+                },
+                "response_content" : {
+                  "type" : "string"
+                },
+                "status" : {
+                  "type" : "string"
+                },
+                "satisfaction_rating" : {
+                  "type" : "string"
+                },
+                "visibility" : {
+                  "type" : "string"
+                },
+                "consultation_response_template_id" : {
+                  "type" : "integer"
                 }
               }
             }
