@@ -563,6 +563,9 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "created_by" : {
+            "$ref" : "#/components/schemas/UserPublicProfile"
+          },
           "level" : {
             "$ref" : "#/components/schemas/MinistryLevel"
           },
