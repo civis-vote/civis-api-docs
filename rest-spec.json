@@ -254,6 +254,130 @@
         }
       }
     },
+    "/locations/_search" : {
+      "post" : {
+        "tags" : [ "location" ],
+        "summary" : "List locations",
+        "operationId" : "listLocation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/LocationSearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/_create" : {
+      "post" : {
+        "tags" : [ "location" ],
+        "summary" : "Create a location",
+        "operationId" : "createLocation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Location"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/_update" : {
+      "post" : {
+        "tags" : [ "location" ],
+        "summary" : "Update a location",
+        "operationId" : "updateLocation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/LocationUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "updated location",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations/_delete" : {
+      "post" : {
+        "tags" : [ "location" ],
+        "summary" : "Delete location",
+        "operationId" : "deleteLocation",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "location queued for deletion"
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ministries/_list" : {
       "post" : {
         "tags" : [ "ministry" ],
@@ -295,7 +419,7 @@
           "$ref" : "#/components/requestBodies/Ministry"
         },
         "responses" : {
-          "201" : {
+          "200" : {
             "description" : "created",
             "content" : {
               "application/json" : {
@@ -461,7 +585,7 @@
         }
       }
     },
-    "/master_reference_data/_list" : {
+    "/master_reference_data/_search" : {
       "post" : {
         "tags" : [ "master_reference_data" ],
         "summary" : "List master reference data",
@@ -658,6 +782,26 @@
           }
         }
       },
+      "Location" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the location"
+          },
+          "location_type" : {
+            "$ref" : "#/components/schemas/LocationType"
+          },
+          "parent_id" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
       "MasterReferenceData" : {
         "type" : "object",
         "properties" : {
@@ -741,6 +885,10 @@
       "ConsultationCategory" : {
         "type" : "string",
         "enum" : [ "fresh", "amendment_policy", "rule" ]
+      },
+      "LocationType" : {
+        "type" : "string",
+        "enum" : [ "city", "state" ]
       },
       "ReferenceDataType" : {
         "type" : "string",
@@ -861,6 +1009,74 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Location" : {
+        "description" : "Location create object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "name" : {
+                  "type" : "string"
+                },
+                "location_type" : {
+                  "type" : "string"
+                },
+                "parent_id" : {
+                  "type" : "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LocationSearch" : {
+        "description" : "Location search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "filters" : {
+                  "type" : "object",
+                  "properties" : {
+                    "status" : {
+                      "type" : "array",
+                      "items" : {
+                        "$ref" : "#/components/schemas/LocationType"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "LocationUpdate" : {
+        "description" : "Location update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "name" : {
+                  "type" : "string"
+                },
+                "location_type" : {
+                  "type" : "string"
+                },
+                "parent_id" : {
+                  "type" : "integer"
                 }
               }
             }
