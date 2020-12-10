@@ -490,6 +490,14 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "original_deadline" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "latest_deadline" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
           "response_deadline" : {
             "type" : "string",
             "format" : "date-time"
