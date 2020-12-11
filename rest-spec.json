@@ -956,24 +956,37 @@
       "FilterBase" : {
         "type" : "object",
         "properties" : {
-          "query" : {
-            "type" : "string"
-          },
-          "created_at_start" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "created_at_end" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at_start" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at_end" : {
-            "type" : "string",
-            "format" : "date-time"
+          "filters" : {
+            "type" : "object",
+            "properties" : {
+              "query" : {
+                "type" : "string"
+              },
+              "created_at" : {
+                "properties" : {
+                  "from" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "to" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  }
+                }
+              },
+              "updated_at" : {
+                "properties" : {
+                  "from" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  },
+                  "to" : {
+                    "type" : "string",
+                    "format" : "date-time"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1224,21 +1237,29 @@
                           "type" : "integer"
                         }
                       },
-                      "published_at_start" : {
-                        "type" : "string",
-                        "format" : "date-time"
+                      "published_at" : {
+                        "properties" : {
+                          "from" : {
+                            "type" : "string",
+                            "format" : "date-time"
+                          },
+                          "to" : {
+                            "type" : "string",
+                            "format" : "date-time"
+                          }
+                        }
                       },
-                      "published_at_end" : {
-                        "type" : "string",
-                        "format" : "date-time"
-                      },
-                      "original_deadline_start" : {
-                        "type" : "string",
-                        "format" : "date-time"
-                      },
-                      "original_deadline_end" : {
-                        "type" : "string",
-                        "format" : "date-time"
+                      "original_deadline" : {
+                        "properties" : {
+                          "from" : {
+                            "type" : "string",
+                            "format" : "date-time"
+                          },
+                          "to" : {
+                            "type" : "string",
+                            "format" : "date-time"
+                          }
+                        }
                       },
                       "is_featured" : {
                         "type" : "boolean"
