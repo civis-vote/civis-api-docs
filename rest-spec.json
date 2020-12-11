@@ -1297,9 +1297,6 @@
                 "response_content" : {
                   "type" : "string"
                 },
-                "status" : {
-                  "type" : "string"
-                },
                 "satisfaction_rating" : {
                   "type" : "string"
                 },
@@ -1328,9 +1325,6 @@
                   "type" : "integer"
                 },
                 "response_content" : {
-                  "type" : "string"
-                },
-                "status" : {
                   "type" : "string"
                 },
                 "satisfaction_rating" : {
