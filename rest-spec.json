@@ -222,7 +222,6 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
