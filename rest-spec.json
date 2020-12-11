@@ -394,6 +394,41 @@
         }
       }
     },
+    "/consultation_responses/_vote" : {
+      "post" : {
+        "tags" : [ "consultation_response" ],
+        "summary" : "vote consultation response",
+        "operationId" : "voteConsultationResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationResponseVote"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "consultation response voted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ConsultationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/locations/_search" : {
       "post" : {
         "tags" : [ "location" ],
@@ -1228,6 +1263,27 @@
                 },
                 "consultation_response_template_id" : {
                   "type" : "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ConsultationResponseVote" : {
+        "description" : "Consultation response update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "consultation_response_id" : {
+                  "type" : "integer"
+                },
+                "vote_direction" : {
+                  "type" : "string"
                 }
               }
             }
