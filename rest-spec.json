@@ -34,7 +34,7 @@
     "description" : "A service to store, list and update locations"
   }, {
     "name" : "master_reference_data",
-    "description" : "All reference data is managed on this endpoint"
+    "description" : "All reference data is managed on these endpoints"
   } ],
   "paths" : {
     "/consultations/_search" : {
