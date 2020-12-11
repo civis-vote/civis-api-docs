@@ -929,6 +929,30 @@
           }
         }
       },
+      "FilterBase" : {
+        "type" : "object",
+        "properties" : {
+          "query" : {
+            "type" : "string"
+          },
+          "created_at_start" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "created_at_end" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at_start" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at_end" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "Location" : {
         "type" : "object",
         "properties" : {
@@ -1144,32 +1168,36 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "filters" : {
-                  "type" : "object",
-                  "properties" : {
-                    "status" : {
-                      "type" : "array",
-                      "items" : {
-                        "$ref" : "#/components/schemas/ConsultationStatus"
-                      }
-                    },
-                    "id" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "integer"
-                      }
-                    },
-                    "ministry_id" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "integer"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/FilterBase"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "filters" : {
+                    "type" : "object",
+                    "properties" : {
+                      "status" : {
+                        "type" : "array",
+                        "items" : {
+                          "$ref" : "#/components/schemas/ConsultationStatus"
+                        }
+                      },
+                      "id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      },
+                      "ministry_id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
                       }
                     }
                   }
                 }
-              }
+              } ]
             }
           }
         }
