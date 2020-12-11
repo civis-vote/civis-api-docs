@@ -1462,6 +1462,9 @@
                 },
                 "summary" : {
                   "type" : "string"
+                },
+                "level" : {
+                  "$ref" : "#/components/schemas/MinistryLevel"
                 }
               }
             }
