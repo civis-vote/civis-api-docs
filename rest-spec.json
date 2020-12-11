@@ -24,17 +24,11 @@
     "name" : "consultation",
     "description" : "A document that an organisation requires public or private feedback on"
   }, {
-    "name" : "consultation_response",
+    "name" : "response",
     "description" : "A response is feedback to a consultation"
   }, {
     "name" : "ministry",
     "description" : "A government department that can launch multiple consultations."
-  }, {
-    "name" : "location",
-    "description" : "A service to store, list and update locations"
-  }, {
-    "name" : "master_reference_data",
-    "description" : "All reference data is managed on these endpoints"
   } ],
   "paths" : {
     "/consultations/_search" : {
@@ -74,7 +68,6 @@
       }
     },
     "/consultations/_create" : {
-      "description" : "Create a consultation",
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Create consultation",
@@ -110,7 +103,6 @@
       }
     },
     "/consultations/_update" : {
-      "description" : "Update details on a consultation",
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Update consultation",
@@ -146,7 +138,6 @@
       }
     },
     "/consultations/_delete" : {
-      "description" : "Delete a consultation",
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Delete consultation",
@@ -172,7 +163,6 @@
       }
     },
     "/consultations/_publish" : {
-      "description" : "Publish a consultation for feedback on Civis",
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Publish consultation",
@@ -208,7 +198,6 @@
       }
     },
     "/consultations/_reject" : {
-      "description" : "Reject a draft consultation",
       "post" : {
         "tags" : [ "consultation" ],
         "summary" : "Reject consultation",
@@ -222,6 +211,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
+                  "type" : "object",
                   "items" : {
                     "$ref" : "#/components/schemas/Consultation"
                   }
@@ -243,7 +233,6 @@
       }
     },
     "/consultation_responses/_search" : {
-      "description" : "List consultation responses",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "List consultation responses",
@@ -276,7 +265,6 @@
       }
     },
     "/consultation_responses/_create" : {
-      "description" : "Create a draft consultation response",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "Create consultation response",
@@ -312,7 +300,6 @@
       }
     },
     "/consultation_responses/_update" : {
-      "description" : "Update a response to a consultation",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "Update consultation response",
@@ -348,7 +335,6 @@
       }
     },
     "/consultation_responses/_delete" : {
-      "description" : "Delete a response to a consultation",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "Delete consultation response",
@@ -374,7 +360,6 @@
       }
     },
     "/consultation_responses/_submit" : {
-      "description" : "Submit a response to a consultation",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "Submit consultation",
@@ -410,7 +395,6 @@
       }
     },
     "/consultation_responses/_vote" : {
-      "description" : "Vote up/down a response to a consultation",
       "post" : {
         "tags" : [ "consultation_response" ],
         "summary" : "vote consultation response",
@@ -446,7 +430,6 @@
       }
     },
     "/locations/_search" : {
-      "description" : "List and search through locations available on Civis",
       "post" : {
         "tags" : [ "location" ],
         "summary" : "List locations",
@@ -481,8 +464,7 @@
         }
       }
     },
-    "/location/_create" : {
-      "description" : "Create a new location",
+    "/locations/_create" : {
       "post" : {
         "tags" : [ "location" ],
         "summary" : "Create a location",
@@ -514,8 +496,7 @@
         }
       }
     },
-    "/location/_update" : {
-      "description" : "Update a location",
+    "/locations/_update" : {
       "post" : {
         "tags" : [ "location" ],
         "summary" : "Update a location",
@@ -548,7 +529,6 @@
       }
     },
     "/locations/_delete" : {
-      "description" : "Delete a location",
       "post" : {
         "tags" : [ "location" ],
         "summary" : "Delete location",
@@ -573,8 +553,7 @@
         }
       }
     },
-    "/ministries/_list" : {
-      "description" : "List ministries and filter through them",
+    "/ministries/list" : {
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "List ministries",
@@ -607,7 +586,6 @@
       }
     },
     "/ministries/_create" : {
-      "description" : "Create a ministry",
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Create a ministry",
@@ -629,40 +607,7 @@
         }
       }
     },
-    "/ministries/_get" : {
-      "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Get a ministry",
-        "operationId" : "getMinistry",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/Id"
-        },
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Ministry"
-                }
-              }
-            }
-          },
-          "default" : {
-            "description" : "Request failed",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/ministries/_update" : {
-      "description" : "Update a ministry",
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Update a ministry",
@@ -695,7 +640,6 @@
       }
     },
     "/ministries/_delete" : {
-      "description" : "Delete a ministry",
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Delete a ministry",
@@ -721,7 +665,6 @@
       }
     },
     "/ministries/_publish" : {
-      "description" : "Publish a ministry",
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Publish a ministry",
@@ -753,8 +696,7 @@
         }
       }
     },
-    "/ministry/_reject" : {
-      "description" : "Reject a ministry",
+    "/ministries/_reject" : {
       "post" : {
         "tags" : [ "ministry" ],
         "summary" : "Reject a ministry",
@@ -787,7 +729,6 @@
       }
     },
     "/master_reference_data/_search" : {
-      "description" : "Search and filter through master reference data",
       "post" : {
         "tags" : [ "master_reference_data" ],
         "summary" : "List master reference data",
@@ -823,7 +764,6 @@
       }
     },
     "/master_reference_data/_create" : {
-      "description" : "create master reference data",
       "post" : {
         "tags" : [ "master_reference_data" ],
         "summary" : "Create a master reference data",
@@ -856,7 +796,6 @@
       }
     },
     "/master_reference_data/_update" : {
-      "description" : "update master reference data",
       "post" : {
         "tags" : [ "master_reference_data" ],
         "summary" : "Update master_reference_data",
@@ -1461,9 +1400,6 @@
                 },
                 "summary" : {
                   "type" : "string"
-                },
-                "level" : {
-                  "$ref" : "#/components/schemas/MinistryLevel"
                 }
               }
             }
