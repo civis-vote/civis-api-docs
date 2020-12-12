@@ -1051,6 +1051,14 @@
             },
             "status" : {
               "$ref" : "#/components/schemas/MinistryStatus"
+            },
+            "primary_email" : {
+              "type" : "string",
+              "description" : "Email address for correspondence"
+            },
+            "secondary_email" : {
+              "type" : "string",
+              "description" : "Additional email address for correspondence"
             }
           }
         } ]
@@ -1483,6 +1491,14 @@
               "properties" : {
                 "name" : {
                   "type" : "string"
+                },
+                "primary_email" : {
+                  "type" : "string",
+                  "description" : "Email address for correspondence"
+                },
+                "secondary_email" : {
+                  "type" : "string",
+                  "description" : "Additional email address for correspondence"
                 },
                 "summary" : {
                   "type" : "string"
