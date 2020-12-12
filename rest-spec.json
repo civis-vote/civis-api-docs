@@ -1102,6 +1102,10 @@
         "type" : "string",
         "enum" : [ "dissatisfied", "somewhat_dissatisfied", "somewhat_satisfied", "satisfied" ]
       },
+      "ConsultationResponseVoteDirection" : {
+        "type" : "string",
+        "enum" : [ "up", "down" ]
+      },
       "LocationType" : {
         "type" : "string",
         "enum" : [ "city", "state" ]
@@ -1162,10 +1166,10 @@
                   "type" : "string"
                 },
                 "visibility_level" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/VisibilityLevel"
                 },
                 "consultation_category" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationCategory"
                 }
               }
             }
@@ -1189,7 +1193,7 @@
                   "type" : "string"
                 },
                 "visibility_level" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/VisibilityLevel"
                 }
               }
             }
@@ -1276,10 +1280,10 @@
                   "type" : "string"
                 },
                 "satisfaction_rating" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
                 },
                 "visibility" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationResponseVisibility"
                 },
                 "consultation_response_template_id" : {
                   "type" : "integer"
@@ -1306,10 +1310,10 @@
                   "type" : "string"
                 },
                 "satisfaction_rating" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
                 },
                 "visibility" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationResponseVisibility"
                 },
                 "consultation_response_template_id" : {
                   "type" : "integer"
@@ -1333,7 +1337,7 @@
                   "type" : "integer"
                 },
                 "vote_direction" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ConsultationResponseVoteDirection"
                 }
               }
             }
@@ -1419,7 +1423,7 @@
                   "type" : "string"
                 },
                 "reference_data_type" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ReferenceDataType"
                 }
               }
             }
@@ -1463,7 +1467,7 @@
                   "type" : "string"
                 },
                 "reference_data_type" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/ReferenceDataType"
                 }
               }
             }
