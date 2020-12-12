@@ -1373,7 +1373,7 @@
                   "type" : "string"
                 },
                 "location_type" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/LocationType"
                 },
                 "parent_id" : {
                   "type" : "integer"
@@ -1393,7 +1393,7 @@
                 "filters" : {
                   "type" : "object",
                   "properties" : {
-                    "status" : {
+                    "location_type" : {
                       "type" : "array",
                       "items" : {
                         "$ref" : "#/components/schemas/LocationType"
