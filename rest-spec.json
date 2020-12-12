@@ -857,101 +857,110 @@
   },
   "components" : {
     "schemas" : {
-      "Consultation" : {
+      "BaseObject" : {
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "title" : {
-            "type" : "string",
-            "description" : "Title of the consultation"
-          },
           "created_at" : {
             "type" : "string",
             "format" : "date-time"
           },
-          "created_by" : {
-            "$ref" : "#/components/schemas/UserPublicProfile"
-          },
-          "published_at" : {
+          "updated_at" : {
             "type" : "string",
             "format" : "date-time"
-          },
-          "rejected_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "original_deadline" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "latest_deadline" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "response_deadline" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "ministry" : {
-            "$ref" : "#/components/schemas/Ministry"
-          },
-          "is_featured" : {
-            "type" : "boolean"
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/ConsultationStatus"
-          },
-          "summary" : {
-            "type" : "string"
-          },
-          "visibility" : {
-            "$ref" : "#/components/schemas/VisibilityLevel"
-          },
-          "consultation_category" : {
-            "$ref" : "#/components/schemas/ConsultationCategory"
           }
         }
+      },
+      "Consultation" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "title" : {
+              "type" : "string",
+              "description" : "Title of the consultation"
+            },
+            "created_by" : {
+              "$ref" : "#/components/schemas/UserPublicProfile"
+            },
+            "published_at" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "rejected_at" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "original_deadline" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "latest_deadline" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "response_deadline" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "ministry" : {
+              "$ref" : "#/components/schemas/Ministry"
+            },
+            "is_featured" : {
+              "type" : "boolean"
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/ConsultationStatus"
+            },
+            "summary" : {
+              "type" : "string"
+            },
+            "visibility" : {
+              "$ref" : "#/components/schemas/VisibilityLevel"
+            },
+            "consultation_category" : {
+              "$ref" : "#/components/schemas/ConsultationCategory"
+            }
+          }
+        } ]
       },
       "ConsultationResponse" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "consultation" : {
-            "$ref" : "#/components/schemas/Consultation"
-          },
-          "response_content" : {
-            "type" : "string"
-          },
-          "user" : {
-            "$ref" : "#/components/schemas/UserPublicProfile"
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/ConsultationResponseStatus"
-          },
-          "visibility" : {
-            "$ref" : "#/components/schemas/ConsultationResponseVisibility"
-          },
-          "satisfaction_rating" : {
-            "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
-          },
-          "consultation_response_template_id" : {
-            "type" : "integer"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "submitted_at" : {
-            "type" : "string",
-            "format" : "date-time"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "consultation" : {
+              "$ref" : "#/components/schemas/Consultation"
+            },
+            "response_content" : {
+              "type" : "string"
+            },
+            "user" : {
+              "$ref" : "#/components/schemas/UserPublicProfile"
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/ConsultationResponseStatus"
+            },
+            "visibility" : {
+              "$ref" : "#/components/schemas/ConsultationResponseVisibility"
+            },
+            "satisfaction_rating" : {
+              "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
+            },
+            "consultation_response_template_id" : {
+              "type" : "integer"
+            },
+            "submitted_at" : {
+              "type" : "string",
+              "format" : "date-time"
+            }
           }
-        }
+        } ]
       },
       "DateRange" : {
         "type" : "object",
@@ -986,92 +995,84 @@
         }
       },
       "Location" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string",
-            "description" : "Name of the location"
-          },
-          "location_type" : {
-            "$ref" : "#/components/schemas/LocationType"
-          },
-          "parent_id" : {
-            "type" : "integer",
-            "format" : "int64"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Name of the location"
+            },
+            "location_type" : {
+              "$ref" : "#/components/schemas/LocationType"
+            },
+            "parent_id" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           }
-        }
+        } ]
       },
       "MasterReferenceData" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string",
-            "description" : "Name of the reference data"
-          },
-          "reference_data_type" : {
-            "$ref" : "#/components/schemas/ReferenceDataType"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Name of the reference data"
+            },
+            "reference_data_type" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            }
           }
-        }
+        } ]
       },
       "Ministry" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string",
-            "description" : "Name of the ministry"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "created_by" : {
-            "$ref" : "#/components/schemas/UserPublicProfile"
-          },
-          "level" : {
-            "$ref" : "#/components/schemas/MinistryLevel"
-          },
-          "summary" : {
-            "type" : "string"
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/MinistryStatus"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Name of the ministry"
+            },
+            "created_by" : {
+              "$ref" : "#/components/schemas/UserPublicProfile"
+            },
+            "level" : {
+              "$ref" : "#/components/schemas/MinistryLevel"
+            },
+            "summary" : {
+              "type" : "string"
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/MinistryStatus"
+            }
           }
-        }
+        } ]
       },
       "UserPublicProfile" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "first_name" : {
-            "type" : "string"
-          },
-          "last_name" : {
-            "type" : "string"
-          },
-          "profile_picture" : {
-            "type" : "string",
-            "format" : "uri"
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "first_name" : {
+              "type" : "string"
+            },
+            "last_name" : {
+              "type" : "string"
+            },
+            "profile_picture" : {
+              "type" : "string",
+              "format" : "uri"
+            }
           }
-        }
+        } ]
       },
       "MinistryStatus" : {
         "type" : "string",
