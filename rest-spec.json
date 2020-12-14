@@ -899,8 +899,11 @@
           "sort" : {
             "type" : "object",
             "properties" : {
-              "created_at" : {
+              "key" : {
                 "type" : "string"
+              },
+              "direction" : {
+                "$ref" : "#/components/schemas/SortDirection"
               }
             }
           }
@@ -1159,6 +1162,10 @@
       "ReferenceDataType" : {
         "type" : "string",
         "enum" : [ "val1", "val1" ]
+      },
+      "SortDirection" : {
+        "type" : "string",
+        "enum" : [ "asc", "desc" ]
       },
       "VisibilityLevel" : {
         "type" : "string",
