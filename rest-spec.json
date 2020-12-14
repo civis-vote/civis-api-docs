@@ -82,10 +82,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Consultation"
-                  }
+                  "$ref" : "#/components/schemas/Consultation"
                 }
               }
             }
@@ -118,10 +115,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Consultation"
-                  }
+                  "$ref" : "#/components/schemas/Consultation"
                 }
               }
             }
@@ -180,10 +174,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Consultation"
-                  }
+                  "$ref" : "#/components/schemas/Consultation"
                 }
               }
             }
@@ -216,10 +207,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Consultation"
-                  }
+                  "$ref" : "#/components/schemas/Consultation"
                 }
               }
             }
@@ -285,10 +273,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ConsultationResponse"
-                  }
+                  "$ref" : "#/components/schemas/ConsultationResponse"
                 }
               }
             }
@@ -321,10 +306,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Consultation"
-                  }
+                  "$ref" : "#/components/schemas/Consultation"
                 }
               }
             }
@@ -383,10 +365,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ConsultationResponse"
-                  }
+                  "$ref" : "#/components/schemas/ConsultationResponse"
                 }
               }
             }
@@ -419,10 +398,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ConsultationResponse"
-                  }
+                  "$ref" : "#/components/schemas/ConsultationResponse"
                 }
               }
             }
@@ -795,7 +771,7 @@
           "$ref" : "#/components/requestBodies/MasterReferenceData"
         },
         "responses" : {
-          "201" : {
+          "200" : {
             "description" : "created",
             "content" : {
               "application/json" : {
@@ -833,10 +809,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "items" : {
-                    "$ref" : "#/components/schemas/MasterReferenceData"
-                  }
+                  "$ref" : "#/components/schemas/MasterReferenceData"
                 }
               }
             }
