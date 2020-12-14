@@ -874,6 +874,63 @@
           }
         }
       },
+      "BaseFilterObject" : {
+        "type" : "object",
+        "properties" : {
+          "filters" : {
+            "type" : "object",
+            "properties" : {
+              "query" : {
+                "type" : "string"
+              },
+              "created_at" : {
+                "$ref" : "#/components/schemas/DateRange"
+              },
+              "updated_at" : {
+                "$ref" : "#/components/schemas/DateRange"
+              }
+            }
+          }
+        }
+      },
+      "BaseSortObject" : {
+        "type" : "object",
+        "properties" : {
+          "sort" : {
+            "type" : "object",
+            "properties" : {
+              "created_at" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "BasePagingObject" : {
+        "type" : "object",
+        "properties" : {
+          "paging" : {
+            "type" : "object",
+            "properties" : {
+              "per_page" : {
+                "type" : "integer"
+              },
+              "page" : {
+                "type" : "integer"
+              }
+            }
+          }
+        }
+      },
+      "BaseRequestObject" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseFilterObject"
+        }, {
+          "$ref" : "#/components/schemas/BaseSortObject"
+        }, {
+          "$ref" : "#/components/schemas/BasePagingObject"
+        } ]
+      },
       "Consultation" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -972,25 +1029,6 @@
           "to" : {
             "type" : "string",
             "format" : "date-time"
-          }
-        }
-      },
-      "FilterBase" : {
-        "type" : "object",
-        "properties" : {
-          "filters" : {
-            "type" : "object",
-            "properties" : {
-              "query" : {
-                "type" : "string"
-              },
-              "created_at" : {
-                "$ref" : "#/components/schemas/DateRange"
-              },
-              "updated_at" : {
-                "$ref" : "#/components/schemas/DateRange"
-              }
-            }
           }
         }
       },
@@ -1214,7 +1252,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/FilterBase"
+                "$ref" : "#/components/schemas/BaseRequestObject"
               }, {
                 "type" : "object",
                 "properties" : {
