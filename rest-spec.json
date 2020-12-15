@@ -29,6 +29,12 @@
   }, {
     "name" : "ministry",
     "description" : "A government department that can launch multiple consultations."
+  }, {
+    "name" : "location",
+    "description" : "A service to store, list and update locations"
+  }, {
+    "name" : "master_reference_data",
+    "description" : "All reference data is managed on these endpoint"
   } ],
   "paths" : {
     "/consultations/_search" : {
