@@ -859,6 +859,12 @@
           "filters" : {
             "type" : "object",
             "properties" : {
+              "id" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              },
               "query" : {
                 "type" : "string"
               },
@@ -1250,12 +1256,6 @@
                         "type" : "array",
                         "items" : {
                           "$ref" : "#/components/schemas/ConsultationStatus"
-                        }
-                      },
-                      "id" : {
-                        "type" : "array",
-                        "items" : {
-                          "type" : "integer"
                         }
                       },
                       "ministry_id" : {
