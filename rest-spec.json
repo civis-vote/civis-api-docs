@@ -1140,7 +1140,8 @@
       },
       "ReferenceDataType" : {
         "type" : "string",
-        "enum" : [ "val1", "val1" ]
+        "description" : "Reference data type:\n  * `domain` - The sector to which an entity is related to E.g: Environment/Urban Settlements\n  * `organisation_type` - The constitution of the entity, as a Government affiliation or a non-government capacity\n  * `signup_mode` - Online channel preferred by Civisen for creating an account on Civis; to be chosen between 3 options - Google/Facebook/Form filling\n  * `language` - Indian regional language of summary\n  * `social_media_channel` - Social media channel on which the Consultation has been shared (Facebook/Whatsapp/Twitter/LinkedIn)\n  * `publishing_medium` - The channel(s) through which a Consultation is made available for view to the target audience and scanned by Civis for discovering Consultations. This could be a single or multiple channels.\n",
+        "enum" : [ "domain", "organisation_type", "signup_mode", "language", "social_media_channel", "publishing_medium" ]
       },
       "SortDirection" : {
         "type" : "string",
