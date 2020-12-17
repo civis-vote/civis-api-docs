@@ -664,7 +664,7 @@
       "description" : "Approve an organisation",
       "post" : {
         "tags" : [ "organisation" ],
-        "summary" : "Approve a organisation",
+        "summary" : "Approve an organisation",
         "operationId" : "publishOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
