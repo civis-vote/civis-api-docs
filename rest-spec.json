@@ -1349,7 +1349,7 @@
                           "$ref" : "#/components/schemas/ConsultationStatus"
                         }
                       },
-                      "ministry_id" : {
+                      "organisation_id" : {
                         "type" : "array",
                         "items" : {
                           "type" : "integer"
