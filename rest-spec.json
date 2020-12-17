@@ -28,7 +28,7 @@
     "description" : "A response is feedback to a consultation"
   }, {
     "name" : "organisation",
-    "description" : "A government department that can launch multiple consultations."
+    "description" : "An organisation listed on Civis that can launch multiple consultations."
   }, {
     "name" : "location",
     "description" : "A service to store, list and update locations"
