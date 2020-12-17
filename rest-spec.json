@@ -577,12 +577,12 @@
         }
       }
     },
-    "/ministries/list" : {
-      "description" : "List ministries and filter through them",
+    "/organisations/list" : {
+      "description" : "List organisations and filter through them",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "List ministries",
-        "operationId" : "listMinistries",
+        "tags" : [ "organisation" ],
+        "summary" : "List organisations",
+        "operationId" : "listOrganisations",
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -597,7 +597,7 @@
                       "data" : {
                         "type" : "array",
                         "items" : {
-                          "$ref" : "#/components/schemas/Ministry"
+                          "$ref" : "#/components/schemas/Organisation"
                         }
                       }
                     }
@@ -619,14 +619,14 @@
         }
       }
     },
-    "/ministries/_create" : {
-      "description" : "Create a ministry",
+    "/organisations/_create" : {
+      "description" : "Create a organisation",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Create a ministry",
-        "operationId" : "createMinistry",
+        "tags" : [ "organisation" ],
+        "summary" : "Create a organisation",
+        "operationId" : "createOrganisation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/Ministry"
+          "$ref" : "#/components/requestBodies/Organisation"
         },
         "responses" : {
           "200" : {
@@ -634,7 +634,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Ministry"
+                  "$ref" : "#/components/schemas/Organisation"
                 }
               }
             }
@@ -642,14 +642,14 @@
         }
       }
     },
-    "/ministries/_update" : {
-      "description" : "Update a ministry",
+    "/organisations/_update" : {
+      "description" : "Update a organisation",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Update a ministry",
-        "operationId" : "updateMinistry",
+        "tags" : [ "organisation" ],
+        "summary" : "Update a organisation",
+        "operationId" : "updateOrganisation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/Ministry"
+          "$ref" : "#/components/requestBodies/Organisation"
         },
         "responses" : {
           "200" : {
@@ -657,7 +657,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Ministry"
+                  "$ref" : "#/components/schemas/Organisation"
                 }
               }
             }
@@ -675,18 +675,18 @@
         }
       }
     },
-    "/ministries/_delete" : {
-      "description" : "Delete a ministry",
+    "/organisations/_delete" : {
+      "description" : "Delete a organisations",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Delete a ministry",
-        "operationId" : "deleteMinistry",
+        "tags" : [ "organisation" ],
+        "summary" : "Delete a organisation",
+        "operationId" : "deleteOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
-            "description" : "consultation queued for deletion"
+            "description" : "organisation queued for deletion"
           },
           "default" : {
             "description" : "Request failed",
@@ -701,22 +701,22 @@
         }
       }
     },
-    "/ministries/_publish" : {
-      "description" : "Publish a ministry",
+    "/organisations/_approve" : {
+      "description" : "Approve a organisation",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Publish a ministry",
-        "operationId" : "publishMinistry",
+        "tags" : [ "organisation" ],
+        "summary" : "Approve a organisation",
+        "operationId" : "publishOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
-            "description" : "ministry published",
+            "description" : "organisation approved",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Ministry"
+                  "$ref" : "#/components/schemas/Organisation"
                 }
               }
             }
@@ -734,22 +734,22 @@
         }
       }
     },
-    "/ministries/_reject" : {
-      "description" : "Reject a ministry",
+    "/organisations/_reject" : {
+      "description" : "Reject a organisation",
       "post" : {
-        "tags" : [ "ministry" ],
-        "summary" : "Reject a ministry",
-        "operationId" : "rejectMinistry",
+        "tags" : [ "organisation" ],
+        "summary" : "Reject a organisation",
+        "operationId" : "rejecOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
-            "description" : "ministry rejected",
+            "description" : "organisation queued for rejected",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/Ministry"
+                  "$ref" : "#/components/schemas/Organisation"
                 }
               }
             }
@@ -1016,8 +1016,8 @@
               "type" : "string",
               "format" : "date-time"
             },
-            "ministry" : {
-              "$ref" : "#/components/schemas/Ministry"
+            "organisation" : {
+              "$ref" : "#/components/schemas/Organisation"
             },
             "is_featured" : {
               "type" : "boolean"
@@ -1120,15 +1120,18 @@
           }
         } ]
       },
-      "Ministry" : {
+      "Organisation" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
           "type" : "object",
           "properties" : {
+            "organisation_type" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            },
             "name" : {
               "type" : "string",
-              "description" : "Name of the ministry"
+              "description" : "Name of the organisation"
             },
             "created_by" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
@@ -1136,11 +1139,11 @@
             "level" : {
               "$ref" : "#/components/schemas/MinistryLevel"
             },
-            "summary" : {
-              "type" : "string"
+            "location" : {
+              "$ref" : "#/components/schemas/Location"
             },
             "status" : {
-              "$ref" : "#/components/schemas/MinistryStatus"
+              "$ref" : "#/components/schemas/OrganisationStatus"
             },
             "primary_email" : {
               "type" : "string",
@@ -1149,6 +1152,30 @@
             "secondary_email" : {
               "type" : "string",
               "description" : "Additional email address for correspondence"
+            },
+            "points_of_contact" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/PointOfContact"
+              }
+            }
+          }
+        } ]
+      },
+      "PointOfContact" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "full_name" : {
+              "type" : "string"
+            },
+            "designation" : {
+              "type" : "string"
+            },
+            "email" : {
+              "type" : "string"
             }
           }
         } ]
@@ -1172,7 +1199,7 @@
           }
         } ]
       },
-      "MinistryStatus" : {
+      "OrganisationStatus" : {
         "type" : "string",
         "enum" : [ "approved", "rejected", "in_reivew" ]
       },
@@ -1571,15 +1598,43 @@
           }
         }
       },
-      "Ministry" : {
-        "description" : "Ministry input object",
+      "Organisation" : {
+        "description" : "Organisation input object",
         "content" : {
           "application/json" : {
             "schema" : {
               "type" : "object",
               "properties" : {
                 "name" : {
-                  "type" : "string"
+                  "type" : "string",
+                  "description" : "Text carrying the full name of the organisation, in English"
+                },
+                "organisation_type" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/ReferenceDataType"
+                  }, {
+                    "description" : "Type of the entity, if it is an individual or an organisation and also if it is a Government affiliated one or not"
+                  } ]
+                },
+                "level" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/MinistryLevel"
+                  }, {
+                    "description" : "The jurisdiction of Government that the Consultation has originated from. For Consultations not published by the Government, the category would be 'other'"
+                  } ]
+                },
+                "location_id" : {
+                  "type" : "integer",
+                  "description" : "Geographical location of the organisation"
+                },
+                "status" : {
+                  "$ref" : "#/components/schemas/OrganisationStatus"
+                },
+                "domains" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ReferenceDataType"
+                  }
                 },
                 "primary_email" : {
                   "type" : "string",
@@ -1589,7 +1644,31 @@
                   "type" : "string",
                   "description" : "Additional email address for correspondence"
                 },
-                "summary" : {
+                "points_of_contact" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/requestBodies/PointOfContact"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "PointOfContact" : {
+        "description" : "Point of contact input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "full_name" : {
+                  "type" : "string"
+                },
+                "designation" : {
+                  "type" : "string"
+                },
+                "email" : {
                   "type" : "string"
                 }
               }
