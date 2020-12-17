@@ -246,6 +246,9 @@
         "tags" : [ "consultation_response" ],
         "summary" : "List consultation responses",
         "operationId" : "listConsultationResponses",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationResponseSearch"
+        },
         "responses" : {
           "200" : {
             "description" : "list consultation response",
@@ -1626,6 +1629,18 @@
           }
         }
       },
+      "ConsultationResponseSearch" : {
+        "description" : "Consultation response search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
+            }
+          }
+        }
+      },
       "ConsultationResponseUpdate" : {
         "description" : "Consultation response update object",
         "content" : {
@@ -1737,20 +1752,24 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "filters" : {
-                  "type" : "object",
-                  "properties" : {
-                    "location_type" : {
-                      "type" : "array",
-                      "items" : {
-                        "$ref" : "#/components/schemas/LocationType"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "filters" : {
+                    "type" : "object",
+                    "properties" : {
+                      "location_type" : {
+                        "type" : "array",
+                        "items" : {
+                          "$ref" : "#/components/schemas/LocationType"
+                        }
                       }
                     }
                   }
                 }
-              }
+              } ]
             }
           }
         }
@@ -1802,20 +1821,24 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "filters" : {
-                  "type" : "object",
-                  "properties" : {
-                    "reference_data_type" : {
-                      "type" : "array",
-                      "items" : {
-                        "$ref" : "#/components/schemas/ReferenceDataType"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "filters" : {
+                    "type" : "object",
+                    "properties" : {
+                      "reference_data_type" : {
+                        "type" : "array",
+                        "items" : {
+                          "$ref" : "#/components/schemas/ReferenceDataType"
+                        }
                       }
                     }
                   }
                 }
-              }
+              } ]
             }
           }
         }
