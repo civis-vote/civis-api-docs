@@ -577,12 +577,15 @@
         }
       }
     },
-    "/organisations/list" : {
+    "/organisations/_search" : {
       "description" : "List organisations and filter through them",
       "post" : {
         "tags" : [ "organisation" ],
         "summary" : "List organisations",
         "operationId" : "listOrganisations",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/OrganisationSearch"
+        },
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -1723,6 +1726,18 @@
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      "OrganisationSearch" : {
+        "description" : "Organisation search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
             }
           }
         }
