@@ -748,6 +748,16 @@
                 }
               }
             }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
