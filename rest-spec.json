@@ -661,7 +661,7 @@
       }
     },
     "/organisations/_approve" : {
-      "description" : "Approve a organisation",
+      "description" : "Approve an organisation",
       "post" : {
         "tags" : [ "organisation" ],
         "summary" : "Approve a organisation",
