@@ -1300,6 +1300,9 @@
                 },
                 "consultation_category" : {
                   "$ref" : "#/components/schemas/ConsultationCategory"
+                },
+                "consultation_documents" : {
+                  "$ref" : "#/components/requestBodies/ConsultationDocument"
                 }
               }
             }
@@ -1324,6 +1327,9 @@
                 },
                 "visibility_level" : {
                   "$ref" : "#/components/schemas/VisibilityLevel"
+                },
+                "consultation_documents" : {
+                  "$ref" : "#/components/requestBodies/ConsultationDocument"
                 }
               }
             }
@@ -1386,6 +1392,32 @@
                   }
                 }
               } ]
+            }
+          }
+        }
+      },
+      "ConsultationDocument" : {
+        "description" : "Consultation document create object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "file_id" : {
+                  "type" : "integer",
+                  "description" : "file_id returned after the upload"
+                },
+                "original_url" : {
+                  "type" : "string",
+                  "description" : "Link to the website page on which the consultation document had been originally published by the Organisation"
+                },
+                "languages" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ReferenceDataType"
+                  }
+                }
+              }
             }
           }
         }
