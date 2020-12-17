@@ -869,20 +869,25 @@
             }
           },
           "default" : {
-            "description" : "Request failed",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Error"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/DefaultError"
           }
         }
       }
     }
   },
   "components" : {
+    "responses" : {
+      "DefaultError" : {
+        "description" : "Default error response message",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
     "schemas" : {
       "BaseObject" : {
         "type" : "object",
