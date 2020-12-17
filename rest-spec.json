@@ -440,6 +440,110 @@
         }
       }
     },
+    "/file_servers/_search" : {
+      "description" : "List and search through files saved",
+      "post" : {
+        "tags" : [ "file_server" ],
+        "summary" : "List files",
+        "operationId" : "listFile",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/FileServerSearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/BasePagingResponseObject"
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "$ref" : "#/components/schemas/FileServer"
+                        }
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/file_servers/_create" : {
+      "description" : "Create a file",
+      "post" : {
+        "tags" : [ "file_server" ],
+        "summary" : "Create a file",
+        "operationId" : "createFile",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/FileServer"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FileServer"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/file_servers/_delete" : {
+      "description" : "Delete a file",
+      "post" : {
+        "tags" : [ "file_server" ],
+        "summary" : "Delete a file",
+        "operationId" : "deleteFile",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "queued for deletion"
+          },
+          "default" : {
+            "description" : "Request failed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/locations/_search" : {
       "description" : "List and search through locations available on Civis",
       "post" : {
@@ -1138,6 +1242,31 @@
           }
         }
       },
+      "FileServer" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "url" : {
+              "type" : "string"
+            },
+            "base" : {
+              "type" : "string",
+              "format" : "binary"
+            },
+            "title" : {
+              "type" : "string"
+            },
+            "desc" : {
+              "type" : "string"
+            },
+            "created_by" : {
+              "$ref" : "#/components/schemas/UserPublicProfile"
+            }
+          }
+        } ]
+      },
       "Location" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -1544,6 +1673,40 @@
                   "$ref" : "#/components/schemas/ConsultationResponseVoteDirection"
                 }
               }
+            }
+          }
+        }
+      },
+      "FileServer" : {
+        "description" : "Manages the upload, storage and deletion of the files.",
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "file" : {
+                  "type" : "string",
+                  "format" : "binary"
+                },
+                "title" : {
+                  "type" : "string"
+                },
+                "desc" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "FileServerSearch" : {
+        "description" : "File search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
             }
           }
         }
