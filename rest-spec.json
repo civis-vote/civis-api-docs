@@ -1033,6 +1033,33 @@
             },
             "consultation_category" : {
               "$ref" : "#/components/schemas/ConsultationCategory"
+            },
+            "consultation_documents" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ConsultationDocument"
+              }
+            }
+          }
+        } ]
+      },
+      "ConsultationDocument" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "file_id" : {
+              "type" : "integer"
+            },
+            "original_url" : {
+              "type" : "string"
+            },
+            "languages" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }
             }
           }
         } ]
@@ -1302,7 +1329,10 @@
                   "$ref" : "#/components/schemas/ConsultationCategory"
                 },
                 "consultation_documents" : {
-                  "$ref" : "#/components/requestBodies/ConsultationDocument"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/requestBodies/ConsultationDocument"
+                  }
                 }
               }
             }
@@ -1329,7 +1359,10 @@
                   "$ref" : "#/components/schemas/VisibilityLevel"
                 },
                 "consultation_documents" : {
-                  "$ref" : "#/components/requestBodies/ConsultationDocument"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/requestBodies/ConsultationDocument"
+                  }
                 }
               }
             }
