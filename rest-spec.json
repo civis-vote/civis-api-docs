@@ -1064,6 +1064,25 @@
           }
         } ]
       },
+      "ConsultationDocumentInput" : {
+        "type" : "object",
+        "properties" : {
+          "file_id" : {
+            "type" : "integer",
+            "description" : "file_id returned after the upload"
+          },
+          "original_url" : {
+            "type" : "string",
+            "description" : "Link to the website page on which the consultation document had been originally published by the Organisation"
+          },
+          "languages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            }
+          }
+        }
+      },
       "ConsultationResponse" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -1207,6 +1226,20 @@
           }
         } ]
       },
+      "PointOfContactInput" : {
+        "type" : "object",
+        "properties" : {
+          "full_name" : {
+            "type" : "string"
+          },
+          "designation" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
       "UserPublicProfile" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -1331,7 +1364,7 @@
                 "consultation_documents" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/requestBodies/ConsultationDocument"
+                    "$ref" : "#/components/schemas/ConsultationDocumentInput"
                   }
                 }
               }
@@ -1361,7 +1394,7 @@
                 "consultation_documents" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/requestBodies/ConsultationDocument"
+                    "$ref" : "#/components/schemas/ConsultationDocumentInput"
                   }
                 }
               }
@@ -1425,32 +1458,6 @@
                   }
                 }
               } ]
-            }
-          }
-        }
-      },
-      "ConsultationDocument" : {
-        "description" : "Consultation document create object",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "type" : "object",
-              "properties" : {
-                "file_id" : {
-                  "type" : "integer",
-                  "description" : "file_id returned after the upload"
-                },
-                "original_url" : {
-                  "type" : "string",
-                  "description" : "Link to the website page on which the consultation document had been originally published by the Organisation"
-                },
-                "languages" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ReferenceDataType"
-                  }
-                }
-              }
             }
           }
         }
@@ -1712,29 +1719,8 @@
                 "points_of_contact" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/requestBodies/PointOfContact"
+                    "$ref" : "#/components/schemas/PointOfContactInput"
                   }
-                }
-              }
-            }
-          }
-        }
-      },
-      "PointOfContact" : {
-        "description" : "Point of contact input object",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "type" : "object",
-              "properties" : {
-                "full_name" : {
-                  "type" : "string"
-                },
-                "designation" : {
-                  "type" : "string"
-                },
-                "email" : {
-                  "type" : "string"
                 }
               }
             }
