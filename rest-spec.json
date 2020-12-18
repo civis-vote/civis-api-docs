@@ -1094,21 +1094,24 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "type" : "object",
-          "properties" : {
-            "name" : {
-              "type" : "string",
-              "description" : "Name of the location"
-            },
-            "location_type" : {
-              "$ref" : "#/components/schemas/LocationType"
-            },
-            "parent_id" : {
-              "type" : "integer",
-              "format" : "int64"
-            }
-          }
+          "$ref" : "#/components/schemas/LocationInput"
         } ]
+      },
+      "LocationInput" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the location"
+          },
+          "location_type" : {
+            "$ref" : "#/components/schemas/LocationType"
+          },
+          "parent_id" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
       },
       "MasterReferenceData" : {
         "allOf" : [ {
@@ -1492,18 +1495,9 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "name" : {
-                  "type" : "string"
-                },
-                "location_type" : {
-                  "$ref" : "#/components/schemas/LocationType"
-                },
-                "parent_id" : {
-                  "type" : "integer"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/LocationInput"
+              } ]
             }
           }
         }
