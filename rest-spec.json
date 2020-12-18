@@ -1189,6 +1189,14 @@
           }
         }
       },
+      "RecordId" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          }
+        }
+      },
       "UserPublicProfile" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -1281,12 +1289,7 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                }
-              }
+              "$ref" : "#/components/schemas/RecordId"
             }
           }
         }
@@ -1309,12 +1312,7 @@
               "allOf" : [ {
                 "$ref" : "#/components/schemas/ConsultationInput"
               }, {
-                "type" : "object",
-                "properties" : {
-                  "id" : {
-                    "type" : "integer"
-                  }
-                }
+                "$ref" : "#/components/schemas/RecordId"
               } ]
             }
           }
@@ -1424,27 +1422,11 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "consultation_id" : {
-                  "type" : "integer"
-                },
-                "response_content" : {
-                  "type" : "string"
-                },
-                "satisfaction_rating" : {
-                  "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
-                },
-                "visibility" : {
-                  "$ref" : "#/components/schemas/ConsultationResponseVisibility"
-                },
-                "consultation_response_template_id" : {
-                  "type" : "integer"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationResponse"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
+              } ]
             }
           }
         }
@@ -1454,18 +1436,19 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "consultation_response_id" : {
-                  "type" : "integer"
-                },
-                "vote_direction" : {
-                  "$ref" : "#/components/schemas/ConsultationResponseVoteDirection"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "consultation_response_id" : {
+                    "type" : "integer"
+                  },
+                  "vote_direction" : {
+                    "$ref" : "#/components/schemas/ConsultationResponseVoteDirection"
+                  }
                 }
-              }
+              } ]
             }
           }
         }
@@ -1557,21 +1540,11 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "name" : {
-                  "type" : "string"
-                },
-                "location_type" : {
-                  "$ref" : "#/components/schemas/LocationType"
-                },
-                "parent_id" : {
-                  "type" : "integer"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/Location"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
+              } ]
             }
           }
         }
@@ -1626,18 +1599,11 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "name" : {
-                  "type" : "string"
-                },
-                "reference_data_type" : {
-                  "$ref" : "#/components/schemas/ReferenceDataType"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/MasterReferenceData"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
+              } ]
             }
           }
         }
