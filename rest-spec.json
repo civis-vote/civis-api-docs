@@ -1325,7 +1325,16 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ConsultationDocumentInput"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationInput"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer"
+                  }
+                }
+              } ]
             }
           }
         }
