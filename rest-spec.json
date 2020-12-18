@@ -927,6 +927,12 @@
         }, {
           "type" : "object",
           "properties" : {
+            "consultation_documents" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ConsultationDocument"
+              }
+            },
             "created_by" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
             },
@@ -981,7 +987,7 @@
           "consultation_documents" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/ConsultationDocument"
+              "$ref" : "#/components/schemas/ConsultationDocumentInput"
             }
           }
         }
