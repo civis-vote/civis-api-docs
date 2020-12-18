@@ -1172,18 +1172,7 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "type" : "object",
-          "properties" : {
-            "full_name" : {
-              "type" : "string"
-            },
-            "designation" : {
-              "type" : "string"
-            },
-            "email" : {
-              "type" : "string"
-            }
-          }
+          "$ref" : "#/components/schemas/PointOfContactInput"
         } ]
       },
       "PointOfContactInput" : {
