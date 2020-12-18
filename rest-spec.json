@@ -996,21 +996,7 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "type" : "object",
-          "properties" : {
-            "file_id" : {
-              "type" : "integer"
-            },
-            "original_url" : {
-              "type" : "string"
-            },
-            "languages" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/components/schemas/ReferenceDataType"
-              }
-            }
-          }
+          "$ref" : "#/components/schemas/ConsultationDocumentInput"
         } ]
       },
       "ConsultationDocumentInput" : {
