@@ -661,10 +661,10 @@
       }
     },
     "/organisations/_approve" : {
-      "description" : "Approve an organisation",
+      "description" : "Approve a organisation",
       "post" : {
         "tags" : [ "organisation" ],
-        "summary" : "Approve an organisation",
+        "summary" : "Approve a organisation",
         "operationId" : "publishOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
@@ -923,12 +923,10 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
+          "$ref" : "#/components/schemas/ConsultationInput"
+        }, {
           "type" : "object",
           "properties" : {
-            "title" : {
-              "type" : "string",
-              "description" : "Title of the consultation"
-            },
             "created_by" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
             },
@@ -957,27 +955,36 @@
             },
             "is_featured" : {
               "type" : "boolean"
-            },
-            "status" : {
-              "$ref" : "#/components/schemas/ConsultationStatus"
-            },
-            "summary" : {
-              "type" : "string"
-            },
-            "visibility" : {
-              "$ref" : "#/components/schemas/VisibilityLevel"
-            },
-            "consultation_category" : {
-              "$ref" : "#/components/schemas/ConsultationCategory"
-            },
-            "consultation_documents" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/components/schemas/ConsultationDocument"
-              }
             }
           }
         } ]
+      },
+      "ConsultationInput" : {
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "Title of the consultation"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/ConsultationStatus"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "visibility" : {
+            "$ref" : "#/components/schemas/VisibilityLevel"
+          },
+          "consultation_category" : {
+            "$ref" : "#/components/schemas/ConsultationCategory"
+          },
+          "consultation_documents" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ConsultationDocument"
+            }
+          }
+        }
       },
       "ConsultationDocument" : {
         "allOf" : [ {
@@ -1308,27 +1315,7 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "title" : {
-                  "type" : "string"
-                },
-                "summary" : {
-                  "type" : "string"
-                },
-                "visibility_level" : {
-                  "$ref" : "#/components/schemas/VisibilityLevel"
-                },
-                "consultation_category" : {
-                  "$ref" : "#/components/schemas/ConsultationCategory"
-                },
-                "consultation_documents" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ConsultationDocumentInput"
-                  }
-                }
-              }
+              "$ref" : "#/components/schemas/ConsultationInput"
             }
           }
         }
@@ -1338,27 +1325,7 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "title" : {
-                  "type" : "string"
-                },
-                "summary" : {
-                  "type" : "string"
-                },
-                "visibility_level" : {
-                  "$ref" : "#/components/schemas/VisibilityLevel"
-                },
-                "consultation_documents" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ConsultationDocumentInput"
-                  }
-                }
-              }
+              "$ref" : "#/components/schemas/ConsultationDocumentInput"
             }
           }
         }
