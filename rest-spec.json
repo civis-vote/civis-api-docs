@@ -312,14 +312,14 @@
         }
       }
     },
-    "/file_servers/_search" : {
+    "/files/_search" : {
       "description" : "List and search through files saved",
       "post" : {
-        "tags" : [ "file_server" ],
+        "tags" : [ "file" ],
         "summary" : "List files",
         "operationId" : "listFile",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/FileServerSearch"
+          "$ref" : "#/components/requestBodies/FileSearch"
         },
         "responses" : {
           "200" : {
@@ -335,7 +335,7 @@
                       "data" : {
                         "type" : "array",
                         "items" : {
-                          "$ref" : "#/components/schemas/FileServer"
+                          "$ref" : "#/components/schemas/File"
                         }
                       }
                     }
@@ -350,14 +350,14 @@
         }
       }
     },
-    "/file_servers/_create" : {
+    "/files/_create" : {
       "description" : "Create a file",
       "post" : {
-        "tags" : [ "file_server" ],
+        "tags" : [ "file" ],
         "summary" : "Create a file",
         "operationId" : "createFile",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/FileServer"
+          "$ref" : "#/components/requestBodies/File"
         },
         "responses" : {
           "200" : {
@@ -365,7 +365,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/FileServer"
+                  "$ref" : "#/components/schemas/File"
                 }
               }
             }
@@ -376,10 +376,36 @@
         }
       }
     },
-    "/file_servers/_delete" : {
+    "/files/_update" : {
+      "description" : "Update a file",
+      "post" : {
+        "tags" : [ "file" ],
+        "summary" : "Update a file",
+        "operationId" : "updateFile",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/FileUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "File updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/File"
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/files/_delete" : {
       "description" : "Delete a file",
       "post" : {
-        "tags" : [ "file_server" ],
+        "tags" : [ "file" ],
         "summary" : "Delete a file",
         "operationId" : "deleteFile",
         "requestBody" : {
@@ -1057,7 +1083,7 @@
           }
         }
       },
-      "FileServer" : {
+      "File" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
@@ -1458,7 +1484,7 @@
           }
         }
       },
-      "FileServer" : {
+      "File" : {
         "description" : "Manages the upload, storage and deletion of the files.",
         "content" : {
           "multipart/form-data" : {
@@ -1480,7 +1506,32 @@
           }
         }
       },
-      "FileServerSearch" : {
+      "FileUpdate" : {
+        "description" : "Manages the upload, storage and deletion of the files.",
+        "content" : {
+          "multipart/form-data" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "file" : {
+                  "type" : "string",
+                  "format" : "binary"
+                },
+                "title" : {
+                  "type" : "string"
+                },
+                "desc" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "FileSearch" : {
         "description" : "File search object",
         "content" : {
           "application/json" : {
