@@ -86,14 +86,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/Consultation"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -814,6 +807,16 @@
             }
           }
         }
+      },
+      "Consultation" : {
+        "description" : "Consultation object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Consultation"
+            }
+          }
+        }
       }
     },
     "schemas" : {
@@ -1022,13 +1025,12 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
+          "$ref" : "#/components/schemas/ConsultationResponseInput"
+        }, {
           "type" : "object",
           "properties" : {
             "consultation" : {
               "$ref" : "#/components/schemas/Consultation"
-            },
-            "response_content" : {
-              "type" : "string"
             },
             "user" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
@@ -1036,21 +1038,29 @@
             "status" : {
               "$ref" : "#/components/schemas/ConsultationResponseStatus"
             },
-            "visibility" : {
-              "$ref" : "#/components/schemas/ConsultationResponseVisibility"
-            },
-            "satisfaction_rating" : {
-              "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
-            },
-            "consultation_response_template_id" : {
-              "type" : "integer"
-            },
             "submitted_at" : {
               "type" : "string",
               "format" : "date-time"
             }
           }
         } ]
+      },
+      "ConsultationResponseInput" : {
+        "type" : "object",
+        "properties" : {
+          "response_content" : {
+            "type" : "string"
+          },
+          "visibility" : {
+            "$ref" : "#/components/schemas/ConsultationResponseVisibility"
+          },
+          "satisfaction_rating" : {
+            "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
+          },
+          "consultation_response_template_id" : {
+            "type" : "integer"
+          }
+        }
       },
       "DateRange" : {
         "type" : "object",
@@ -1117,50 +1127,34 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "type" : "object",
-          "properties" : {
-            "name" : {
-              "type" : "string",
-              "description" : "Name of the reference data"
-            },
-            "reference_data_type" : {
-              "$ref" : "#/components/schemas/ReferenceDataType"
-            }
-          }
+          "$ref" : "#/components/schemas/MasterReferenceDataInput"
         } ]
+      },
+      "MasterReferenceDataInput" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Name of the reference data"
+          },
+          "reference_data_type" : {
+            "$ref" : "#/components/schemas/ReferenceDataType"
+          }
+        }
       },
       "Organisation" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
+          "$ref" : "#/components/schemas/OrganisationInput"
+        }, {
           "type" : "object",
           "properties" : {
-            "organisation_type" : {
-              "$ref" : "#/components/schemas/ReferenceDataType"
-            },
-            "name" : {
-              "type" : "string",
-              "description" : "Name of the organisation"
-            },
             "created_by" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
             },
-            "level" : {
-              "$ref" : "#/components/schemas/OrganisationLevel"
-            },
             "location" : {
               "$ref" : "#/components/schemas/Location"
-            },
-            "status" : {
-              "$ref" : "#/components/schemas/OrganisationStatus"
-            },
-            "primary_email" : {
-              "type" : "string",
-              "description" : "Email address for correspondence"
-            },
-            "secondary_email" : {
-              "type" : "string",
-              "description" : "Additional email address for correspondence"
             },
             "points_of_contact" : {
               "type" : "array",
@@ -1170,6 +1164,40 @@
             }
           }
         } ]
+      },
+      "OrganisationInput" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Text carrying the full name of the organisation, in English"
+          },
+          "organisation_type" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            }, {
+              "description" : "Type of the entity, if it is an individual or an organisation and also if it is a Government affiliated one or not"
+            } ]
+          },
+          "level" : {
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/OrganisationLevel"
+            }, {
+              "description" : "The jurisdiction of Government that the Consultation has originated from. For Consultations not published by the Government, the category would be 'other'"
+            } ]
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/OrganisationStatus"
+          },
+          "primary_email" : {
+            "type" : "string",
+            "description" : "Email address for correspondence"
+          },
+          "secondary_email" : {
+            "type" : "string",
+            "description" : "Additional email address for correspondence"
+          }
+        }
       },
       "PointOfContact" : {
         "allOf" : [ {
@@ -1386,24 +1414,16 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "consultation_id" : {
-                  "type" : "integer"
-                },
-                "response_content" : {
-                  "type" : "string"
-                },
-                "satisfaction_rating" : {
-                  "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
-                },
-                "visibility" : {
-                  "$ref" : "#/components/schemas/ConsultationResponseVisibility"
-                },
-                "consultation_response_template_id" : {
-                  "type" : "integer"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationResponseInput"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "consultation_id" : {
+                    "type" : "integer"
+                  }
                 }
-              }
+              } ]
             }
           }
         }
@@ -1426,7 +1446,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationResponse"
+                "$ref" : "#/components/schemas/ConsultationResponseInput"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
@@ -1535,7 +1555,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/Location"
+                "$ref" : "#/components/schemas/LocationInput"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
@@ -1548,15 +1568,9 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "name" : {
-                  "type" : "string"
-                },
-                "reference_data_type" : {
-                  "$ref" : "#/components/schemas/ReferenceDataType"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/MasterReferenceDataInput"
+              } ]
             }
           }
         }
@@ -1594,7 +1608,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/MasterReferenceData"
+                "$ref" : "#/components/schemas/MasterReferenceDataInput"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
@@ -1607,54 +1621,29 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "name" : {
-                  "type" : "string",
-                  "description" : "Text carrying the full name of the organisation, in English"
-                },
-                "organisation_type" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/ReferenceDataType"
-                  }, {
-                    "description" : "Type of the entity, if it is an individual or an organisation and also if it is a Government affiliated one or not"
-                  } ]
-                },
-                "level" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/OrganisationLevel"
-                  }, {
-                    "description" : "The jurisdiction of Government that the Consultation has originated from. For Consultations not published by the Government, the category would be 'other'"
-                  } ]
-                },
-                "location_id" : {
-                  "type" : "integer",
-                  "description" : "Geographical location of the organisation"
-                },
-                "status" : {
-                  "$ref" : "#/components/schemas/OrganisationStatus"
-                },
-                "domains" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/ReferenceDataType"
-                  }
-                },
-                "primary_email" : {
-                  "type" : "string",
-                  "description" : "Email address for correspondence"
-                },
-                "secondary_email" : {
-                  "type" : "string",
-                  "description" : "Additional email address for correspondence"
-                },
-                "points_of_contact" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/PointOfContactInput"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/OrganisationInput"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "location_id" : {
+                    "type" : "integer",
+                    "description" : "Geographical location of the organisation"
+                  },
+                  "domains" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/ReferenceDataType"
+                    }
+                  },
+                  "points_of_contact" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/PointOfContactInput"
+                    }
                   }
                 }
-              }
+              } ]
             }
           }
         }
