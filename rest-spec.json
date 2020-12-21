@@ -47,26 +47,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "allOf" : [ {
-                    "$ref" : "#/components/schemas/BasePagingResponseObject"
-                  }, {
-                    "type" : "object",
-                    "properties" : {
-                      "data" : {
-                        "type" : "array",
-                        "items" : {
-                          "$ref" : "#/components/schemas/Consultation"
-                        }
-                      }
-                    }
-                  } ]
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationRead"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -86,7 +67,7 @@
         },
         "responses" : {
           "200" : {
-            "$ref" : "#/components/responses/Consultation"
+            "$ref" : "#/components/responses/ConsultationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -105,14 +86,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "updates have been accepted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -150,14 +124,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "consultation published",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -176,14 +143,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "consultation rejected",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -808,12 +768,34 @@
           }
         }
       },
-      "Consultation" : {
-        "description" : "Consultation object",
+      "ConsultationWrite" : {
+        "description" : "Accepted, operation queued for execution.",
         "content" : {
           "application/json" : {
             "schema" : {
               "$ref" : "#/components/schemas/Consultation"
+            }
+          }
+        }
+      },
+      "ConsultationRead" : {
+        "description" : "Request Successful",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BasePagingResponseObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/Consultation"
+                    }
+                  }
+                }
+              } ]
             }
           }
         }
