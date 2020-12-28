@@ -947,6 +947,10 @@
             "created_by" : {
               "$ref" : "#/components/schemas/UserPublicProfile"
             },
+            "extension_count" : {
+              "type" : "integer",
+              "description" : "The number of times the deadline of a Consultation has been extended by the Organisation, while the Consultation is live; consequently reflected on Civis portal"
+            },
             "published_at" : {
               "type" : "string",
               "format" : "date-time"
@@ -960,10 +964,6 @@
               "format" : "date-time"
             },
             "latest_deadline" : {
-              "type" : "string",
-              "format" : "date-time"
-            },
-            "response_deadline" : {
               "type" : "string",
               "format" : "date-time"
             },
@@ -1000,6 +1000,24 @@
             "items" : {
               "$ref" : "#/components/schemas/ConsultationDocumentInput"
             }
+          },
+          "publishing_medium" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            }
+          },
+          "domain" : {
+            "$ref" : "#/components/schemas/ReferenceDataType"
+          },
+          "source_published_at" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Date on which the publishing entity made the Consultation available for view to the target audience, on its own platform"
+          },
+          "source_reference_id" : {
+            "type" : "string",
+            "description" : "Unique id assigned to each Consultation, on publishing entity's platform"
           }
         }
       },
