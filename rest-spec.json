@@ -196,7 +196,7 @@
     },
     "/consultations/summaries/_search" : {
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "List consultation summary",
         "operationId" : "listConsultationsummaries",
         "requestBody" : {
@@ -215,7 +215,7 @@
     },
     "/consultations/summaries/_create" : {
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "Create consultation summary",
         "operationId" : "createConsultationsummary",
         "requestBody" : {
@@ -234,7 +234,7 @@
     "/consultations/summaries/_update" : {
       "description" : "update details on a consultation summary",
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "Update consultation summary",
         "operationId" : "updateConsultationSummary",
         "requestBody" : {
@@ -253,7 +253,7 @@
     "/consultations/summaries/_delete" : {
       "description" : "Delete a consultation summary",
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "Delete consultation summary",
         "operationId" : "deleteConsultationSummary",
         "requestBody" : {
@@ -272,7 +272,7 @@
     "/consultations/summaries/_publish" : {
       "description" : "Publish a consultation summary",
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "Publish consultation summary",
         "operationId" : "publishConsultationSummary",
         "requestBody" : {
@@ -291,7 +291,7 @@
     "/consultations/summaries/_unpublish" : {
       "description" : "Unpublish a consultation summary",
       "post" : {
-        "tags" : [ "consultations" ],
+        "tags" : [ "consultation" ],
         "summary" : "unpublish consultation summary",
         "operationId" : "unpublishConsultationSummary",
         "requestBody" : {
