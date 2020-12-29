@@ -187,7 +187,7 @@
     },
     "/consultations/summaries/_search" : {
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "List consultation summary",
         "operationId" : "listConsultationsummaries",
         "requestBody" : {
@@ -206,7 +206,7 @@
     },
     "/consultations/summaries/_create" : {
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "Create consultation summary",
         "operationId" : "createConsultationsummary",
         "requestBody" : {
@@ -225,7 +225,7 @@
     "/consultations/summaries/_update" : {
       "description" : "update details on a consultation summary",
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "Update consultation summary",
         "operationId" : "updateConsultationSummary",
         "requestBody" : {
@@ -244,7 +244,7 @@
     "/consultations/summaries/_delete" : {
       "description" : "Delete a consultation summary",
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "Delete consultation summary",
         "operationId" : "deleteConsultationSummary",
         "requestBody" : {
@@ -263,7 +263,7 @@
     "/consultations/summaries/_publish" : {
       "description" : "Publish a consultation summary",
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "Publish consultation summary",
         "operationId" : "publishConsultationSummary",
         "requestBody" : {
@@ -282,7 +282,7 @@
     "/consultations/summaries/_unpublish" : {
       "description" : "Unpublish a consultation summary",
       "post" : {
-        "tags" : [ "consultation_summary" ],
+        "tags" : [ "consultations" ],
         "summary" : "unpublish consultation summary",
         "operationId" : "unpublishConsultationSummary",
         "requestBody" : {
