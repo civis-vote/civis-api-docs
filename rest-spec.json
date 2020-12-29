@@ -1213,6 +1213,9 @@
             },
             "multimedia_explainer_file" : {
               "$ref" : "#/components/schemas/File"
+            },
+            "language" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
             }
           }
         } ]
@@ -1226,9 +1229,6 @@
           },
           "summary_type" : {
             "$ref" : "#/components/schemas/SummaryType"
-          },
-          "language" : {
-            "$ref" : "#/components/schemas/ReferenceDataType"
           },
           "content" : {
             "type" : "string",
@@ -1684,6 +1684,10 @@
                   "multimedia_explainer_file_id" : {
                     "type" : "integer",
                     "description" : "Multimedia content accompanying text synopsis of Consultation"
+                  },
+                  "language_id" : {
+                    "type" : "integer",
+                    "description" : "Language in which Consultation synopsis has been worded, on Civis' platform, must be the ID of a master reference data language"
                   }
                 }
               } ]
@@ -1706,6 +1710,10 @@
                   "multimedia_explainer_file_id" : {
                     "type" : "integer",
                     "description" : "Multimedia content accompanying text synopsis of Consultation"
+                  },
+                  "language_id" : {
+                    "type" : "integer",
+                    "description" : "Language in which Consultation synopsis has been worded, on Civis' platform, must be the ID of a master reference data language"
                   }
                 }
               } ]
