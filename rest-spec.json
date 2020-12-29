@@ -151,6 +151,119 @@
         }
       }
     },
+    "/consultations/summaries/_search" : {
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "List consultation summary",
+        "operationId" : "listConsultationsummaries",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationSummarySearch"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/ConsultationSummaryRead"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        },
+        "description" : "Get a list of consultation summaries"
+      }
+    },
+    "/consultations/summaries/_create" : {
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "Create consultation summary",
+        "operationId" : "createConsultationsummary",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationSummary"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/ConsultationSummaryWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/consultations/summaries/_update" : {
+      "description" : "update details on a consultation summary",
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "Update consultation summary",
+        "operationId" : "updateConsultationSummary",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/ConsultationSummaryUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/ConsultationSummaryWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/consultations/summaries/_delete" : {
+      "description" : "Delete a consultation summary",
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "Delete consultation summary",
+        "operationId" : "deleteConsultationSummary",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "consultation summary queued for deletion"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/consultations/summaries/_publish" : {
+      "description" : "Publish a consultation summary",
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "Publish consultation summary",
+        "operationId" : "publishConsultationSummary",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/ConsultationSummaryWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/consultations/summaries/_unpublish" : {
+      "description" : "Unpublish a consultation summary",
+      "post" : {
+        "tags" : [ "consultation_summary" ],
+        "summary" : "unpublish consultation summary",
+        "operationId" : "unpublishConsultationSummary",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/ConsultationSummaryWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/consultation_responses/_search" : {
       "description" : "List consultation responses",
       "post" : {
@@ -825,6 +938,38 @@
             }
           }
         }
+      },
+      "ConsultationSummaryRead" : {
+        "description" : "Request Successful",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BasePagingResponseObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "data" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/ConsultationSummary"
+                    }
+                  }
+                }
+              } ]
+            }
+          }
+        }
+      },
+      "ConsultationSummaryWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/ConsultationSummary"
+            }
+          }
+        }
       }
     },
     "schemas" : {
@@ -1018,6 +1163,50 @@
           "source_reference_id" : {
             "type" : "string",
             "description" : "Unique id assigned to each Consultation, on publishing entity's platform"
+          }
+        }
+      },
+      "ConsultationSummary" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "$ref" : "#/components/schemas/ConsultationSummaryInput"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "created_by" : {
+              "$ref" : "#/components/schemas/UserPublicProfile"
+            },
+            "multimedia_explainer_file" : {
+              "$ref" : "#/components/schemas/File"
+            }
+          }
+        } ]
+      },
+      "ConsultationSummaryInput" : {
+        "type" : "object",
+        "properties" : {
+          "consultation_id" : {
+            "type" : "integer",
+            "description" : "Consultation associated with the summary"
+          },
+          "summary_type" : {
+            "$ref" : "#/components/schemas/SummaryType"
+          },
+          "language" : {
+            "$ref" : "#/components/schemas/ReferenceDataType"
+          },
+          "content" : {
+            "type" : "string",
+            "description" : "Text content of Consultation synopsis"
+          },
+          "multimedia_explainer_file_id" : {
+            "type" : "integer",
+            "description" : "Multimedia content accompanying text synopsis of Consultation"
+          },
+          "time_taken" : {
+            "type" : "integer",
+            "description" : "Time taken in seconds, by human actor to prepare the Consultation summary"
           }
         }
       },
@@ -1318,6 +1507,11 @@
         "type" : "string",
         "enum" : [ "asc", "desc" ]
       },
+      "SummaryType" : {
+        "type" : "string",
+        "description" : "Summary type:\n  * `primary` - This is the primary summary created in the primary language of English based on which other summaries are created out of.\n  * `translation` - This is a translated version of the primary summary.\n",
+        "enum" : [ "primary", "translation" ]
+      },
       "VisibilityLevel" : {
         "type" : "string",
         "enum" : [ "public", "private" ]
@@ -1430,6 +1624,42 @@
                     }
                   }
                 }
+              } ]
+            }
+          }
+        }
+      },
+      "ConsultationSummarySearch" : {
+        "description" : "Consultation summary search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
+            }
+          }
+        }
+      },
+      "ConsultationSummary" : {
+        "description" : "Consultation summary create object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/ConsultationInput"
+            }
+          }
+        }
+      },
+      "ConsultationSummaryUpdate" : {
+        "description" : "Consultation summary update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationSummaryInput"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
               } ]
             }
           }
