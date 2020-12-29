@@ -72,6 +72,15 @@
                 }, {
                   "type" : "object",
                   "properties" : {
+                    "publishing_medium_ids" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "integer"
+                      }
+                    },
+                    "domain_id" : {
+                      "type" : "integer"
+                    },
                     "callbackUrl" : {
                       "type" : "string",
                       "format" : "uri"
@@ -1582,19 +1591,6 @@
             "schema" : {
               "allOf" : [ {
                 "$ref" : "#/components/schemas/ConsultationInput"
-              }, {
-                "type" : "object",
-                "properties" : {
-                  "publishing_medium" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "integer"
-                    }
-                  },
-                  "domain_id" : {
-                    "type" : "integer"
-                  }
-                }
               } ]
             }
           }
@@ -1609,6 +1605,19 @@
                 "$ref" : "#/components/schemas/ConsultationInput"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "publishing_medium_ids" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "integer"
+                    }
+                  },
+                  "domain_id" : {
+                    "type" : "integer"
+                  }
+                }
               } ]
             }
           }
