@@ -1130,6 +1130,15 @@
               "type" : "integer",
               "description" : "The number of times the deadline of a Consultation has been extended by the Organisation, while the Consultation is live; consequently reflected on Civis portal"
             },
+            "publishing_medium" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }
+            },
+            "domain" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            },
             "published_at" : {
               "type" : "string",
               "format" : "date-time"
@@ -1179,15 +1188,6 @@
             "items" : {
               "$ref" : "#/components/schemas/ConsultationDocumentInput"
             }
-          },
-          "publishing_medium" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ReferenceDataType"
-            }
-          },
-          "domain" : {
-            "$ref" : "#/components/schemas/ReferenceDataType"
           },
           "source_published_at" : {
             "type" : "string",
@@ -1580,7 +1580,22 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ConsultationInput"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationInput"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "publishing_medium" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "integer"
+                    }
+                  },
+                  "domain_id" : {
+                    "type" : "integer"
+                  }
+                }
+              } ]
             }
           }
         }
