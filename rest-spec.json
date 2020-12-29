@@ -63,7 +63,41 @@
         "summary" : "Create consultation",
         "operationId" : "createConsultation",
         "requestBody" : {
-          "$ref" : "#/components/requestBodies/Consultation"
+          "description" : "Consultation create object",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "allOf" : [ {
+                  "$ref" : "#/components/schemas/ConsultationInput"
+                }, {
+                  "type" : "object",
+                  "properties" : {
+                    "callbackUrl" : {
+                      "type" : "string",
+                      "format" : "uri"
+                    }
+                  },
+                  "required" : [ "callbackUrl" ]
+                } ]
+              }
+            }
+          }
+        },
+        "callbacks" : {
+          "sendNotification" : {
+            "{$request.body#/callbackUrl}" : {
+              "post" : {
+                "requestBody" : {
+                  "$ref" : "#/components/requestBodies/Id"
+                },
+                "responses" : {
+                  "200" : {
+                    "description" : "Sent Notification successfully"
+                  }
+                }
+              }
+            }
+          }
         },
         "responses" : {
           "200" : {
@@ -1200,10 +1234,6 @@
             "type" : "string",
             "description" : "Text content of Consultation synopsis"
           },
-          "multimedia_explainer_file_id" : {
-            "type" : "integer",
-            "description" : "Multimedia content accompanying text synopsis of Consultation"
-          },
           "time_taken" : {
             "type" : "integer",
             "description" : "Time taken in seconds, by human actor to prepare the Consultation summary"
@@ -1646,7 +1676,17 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ConsultationInput"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationSummaryInput"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "multimedia_explainer_file_id" : {
+                    "type" : "integer",
+                    "description" : "Multimedia content accompanying text synopsis of Consultation"
+                  }
+                }
+              } ]
             }
           }
         }
@@ -1660,6 +1700,14 @@
                 "$ref" : "#/components/schemas/ConsultationSummaryInput"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "multimedia_explainer_file_id" : {
+                    "type" : "integer",
+                    "description" : "Multimedia content accompanying text synopsis of Consultation"
+                  }
+                }
               } ]
             }
           }
