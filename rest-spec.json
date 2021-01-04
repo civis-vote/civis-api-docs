@@ -68,7 +68,7 @@
             "application/json" : {
               "schema" : {
                 "allOf" : [ {
-                  "$ref" : "#/components/schemas/ConsultationInput"
+                  "$ref" : "#/components/schemas/Consultation"
                 }, {
                   "type" : "object",
                   "properties" : {
@@ -1020,14 +1020,17 @@
         "type" : "object",
         "properties" : {
           "id" : {
+            "readOnly" : true,
             "type" : "integer",
             "format" : "int64"
           },
           "created_at" : {
+            "readOnly" : true,
             "type" : "string",
             "format" : "date-time"
           },
           "updated_at" : {
+            "readOnly" : true,
             "type" : "string",
             "format" : "date-time"
           }
@@ -1122,10 +1125,33 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/ConsultationInput"
-        }, {
           "type" : "object",
           "properties" : {
+            "title" : {
+              "type" : "string",
+              "description" : "Title of the consultation"
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/ConsultationStatus"
+            },
+            "summary" : {
+              "type" : "string"
+            },
+            "visibility" : {
+              "$ref" : "#/components/schemas/VisibilityLevel"
+            },
+            "consultation_category" : {
+              "$ref" : "#/components/schemas/ConsultationCategory"
+            },
+            "source_published_at" : {
+              "type" : "string",
+              "format" : "date-time",
+              "description" : "Date on which the publishing entity made the Consultation available for view to the target audience, on its own platform"
+            },
+            "source_reference_id" : {
+              "type" : "string",
+              "description" : "Unique id assigned to each Consultation, on publishing entity's platform"
+            },
             "consultation_documents" : {
               "type" : "array",
               "items" : {
@@ -1133,81 +1159,67 @@
               }
             },
             "created_by" : {
-              "$ref" : "#/components/schemas/UserPublicProfile"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "extension_count" : {
+              "readOnly" : true,
               "type" : "integer",
               "description" : "The number of times the deadline of a Consultation has been extended by the Organisation, while the Consultation is live; consequently reflected on Civis portal"
             },
             "publishing_medium" : {
+              "readOnly" : true,
               "type" : "array",
               "items" : {
                 "$ref" : "#/components/schemas/ReferenceDataType"
+              }
+            },
+            "publishing_medium_ids" : {
+              "writeOnly" : true,
+              "type" : "array",
+              "items" : {
+                "type" : "integer"
               }
             },
             "domain" : {
               "$ref" : "#/components/schemas/ReferenceDataType"
             },
             "published_at" : {
+              "readOnly" : true,
               "type" : "string",
               "format" : "date-time"
             },
             "rejected_at" : {
+              "readOnly" : true,
               "type" : "string",
               "format" : "date-time"
             },
             "original_deadline" : {
+              "readOnly" : true,
               "type" : "string",
               "format" : "date-time"
             },
             "latest_deadline" : {
+              "readOnly" : true,
               "type" : "string",
               "format" : "date-time"
             },
             "organisation" : {
-              "$ref" : "#/components/schemas/Organisation"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/Organisation"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "is_featured" : {
+              "readOnly" : true,
               "type" : "boolean"
             }
           }
         } ]
-      },
-      "ConsultationInput" : {
-        "type" : "object",
-        "properties" : {
-          "title" : {
-            "type" : "string",
-            "description" : "Title of the consultation"
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/ConsultationStatus"
-          },
-          "summary" : {
-            "type" : "string"
-          },
-          "visibility" : {
-            "$ref" : "#/components/schemas/VisibilityLevel"
-          },
-          "consultation_category" : {
-            "$ref" : "#/components/schemas/ConsultationCategory"
-          },
-          "consultation_documents" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ConsultationDocumentInput"
-            }
-          },
-          "source_published_at" : {
-            "type" : "string",
-            "format" : "date-time",
-            "description" : "Date on which the publishing entity made the Consultation available for view to the target audience, on its own platform"
-          },
-          "source_reference_id" : {
-            "type" : "string",
-            "description" : "Unique id assigned to each Consultation, on publishing entity's platform"
-          }
-        }
       },
       "ConsultationSummary" : {
         "allOf" : [ {
@@ -1274,27 +1286,24 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/ConsultationDocumentInput"
-        } ]
-      },
-      "ConsultationDocumentInput" : {
-        "type" : "object",
-        "properties" : {
-          "file_id" : {
-            "type" : "integer",
-            "description" : "file_id returned after the upload"
-          },
-          "original_url" : {
-            "type" : "string",
-            "description" : "Link to the website page on which the consultation document had been originally published by the Organisation"
-          },
-          "languages" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/ReferenceDataType"
+          "type" : "object",
+          "properties" : {
+            "file_id" : {
+              "type" : "integer",
+              "description" : "file_id returned after the upload"
+            },
+            "original_url" : {
+              "type" : "string",
+              "description" : "Link to the website page on which the consultation document had been originally published by the Organisation"
+            },
+            "languages" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }
             }
           }
-        }
+        } ]
       },
       "ConsultationResponse" : {
         "allOf" : [ {
@@ -1611,7 +1620,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationInput"
+                "$ref" : "#/components/schemas/Consultation"
               } ]
             }
           }
@@ -1623,22 +1632,9 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationInput"
+                "$ref" : "#/components/schemas/Consultation"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
-              }, {
-                "type" : "object",
-                "properties" : {
-                  "publishing_medium_ids" : {
-                    "type" : "array",
-                    "items" : {
-                      "type" : "integer"
-                    }
-                  },
-                  "domain_id" : {
-                    "type" : "integer"
-                  }
-                }
               } ]
             }
           }
