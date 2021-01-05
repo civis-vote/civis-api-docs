@@ -1309,42 +1309,58 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/ConsultationResponseInput"
-        }, {
           "type" : "object",
           "properties" : {
+            "response_content" : {
+              "writeOnly" : true,
+              "type" : "string"
+            },
+            "visibility" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationResponseVisibility"
+              }, {
+                "writeOnly" : true
+              } ]
+            },
+            "satisfaction_rating" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
+              }, {
+                "writeOnly" : true
+              } ]
+            },
+            "consultation_response_template_id" : {
+              "writeOnly" : true,
+              "type" : "integer"
+            },
             "consultation" : {
-              "$ref" : "#/components/schemas/Consultation"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/Consultation"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "user" : {
-              "$ref" : "#/components/schemas/UserPublicProfile"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "status" : {
-              "$ref" : "#/components/schemas/ConsultationResponseStatus"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ConsultationResponseStatus"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "submitted_at" : {
+              "readOnly" : true,
               "type" : "string",
               "format" : "date-time"
             }
           }
         } ]
-      },
-      "ConsultationResponseInput" : {
-        "type" : "object",
-        "properties" : {
-          "response_content" : {
-            "type" : "string"
-          },
-          "visibility" : {
-            "$ref" : "#/components/schemas/ConsultationResponseVisibility"
-          },
-          "satisfaction_rating" : {
-            "$ref" : "#/components/schemas/ConsultationResponseSatisfactionRating"
-          },
-          "consultation_response_template_id" : {
-            "type" : "integer"
-          }
-        }
       },
       "DateRange" : {
         "type" : "object",
@@ -1744,7 +1760,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationResponseInput"
+                "$ref" : "#/components/schemas/ConsultationResponse"
               }, {
                 "type" : "object",
                 "properties" : {
@@ -1775,7 +1791,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationResponseInput"
+                "$ref" : "#/components/schemas/ConsultationResponse"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
