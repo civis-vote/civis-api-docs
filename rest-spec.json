@@ -1242,45 +1242,39 @@
               "type" : "integer",
               "description" : "Time taken in seconds, by human actor to prepare the Consultation summary"
             },
+            "multimedia_explainer_file_id" : {
+              "writeOnly" : true,
+              "type" : "integer",
+              "description" : "Multimedia content accompanying text synopsis of Consultation"
+            },
+            "language_id" : {
+              "writeOnly" : true,
+              "type" : "integer",
+              "description" : "Language in which Consultation synopsis has been worded, on Civis' platform, must be the ID of a master reference data language"
+            },
             "created_by" : {
-              "$ref" : "#/components/schemas/UserPublicProfile"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "multimedia_explainer_file" : {
-              "$ref" : "#/components/schemas/File"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/File"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "language" : {
-              "$ref" : "#/components/schemas/ReferenceDataType"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }, {
+                "readOnly" : true
+              } ]
             }
           }
         } ]
-      },
-      "ConsultationSummaryInput" : {
-        "type" : "object",
-        "properties" : {
-          "consultation_id" : {
-            "type" : "integer",
-            "description" : "Consultation associated with the summary"
-          },
-          "summary_type" : {
-            "$ref" : "#/components/schemas/SummaryType"
-          },
-          "content" : {
-            "type" : "string",
-            "description" : "Text content of Consultation synopsis"
-          },
-          "time_taken" : {
-            "type" : "integer",
-            "description" : "Time taken in seconds, by human actor to prepare the Consultation summary"
-          },
-          "multimedia_explainer_file_id" : {
-            "type" : "integer",
-            "description" : "Multimedia content accompanying text synopsis of Consultation"
-          },
-          "language_id" : {
-            "type" : "integer",
-            "description" : "Language in which Consultation synopsis has been worded, on Civis' platform, must be the ID of a master reference data language"
-          }
-        }
       },
       "ConsultationDocument" : {
         "allOf" : [ {
@@ -1734,7 +1728,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationSummaryInput"
+                "$ref" : "#/components/schemas/ConsultationSummary"
               } ]
             }
           }
@@ -1746,7 +1740,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/ConsultationSummaryInput"
+                "$ref" : "#/components/schemas/ConsultationSummary"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
