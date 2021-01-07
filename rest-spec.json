@@ -822,7 +822,11 @@
                       "data" : {
                         "type" : "array",
                         "items" : {
-                          "$ref" : "#/components/schemas/MasterReferenceData"
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/MasterReferenceData"
+                          } ]
                         }
                       }
                     }
@@ -848,14 +852,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/MasterReferenceData"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/MasterReferenceDataWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -874,14 +871,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "updates have been accepted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/MasterReferenceData"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/MasterReferenceDataWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -1005,6 +995,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/Organisation"
+              } ]
+            }
+          }
+        }
+      },
+      "MasterReferenceDataWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/MasterReferenceData"
               } ]
             }
           }
