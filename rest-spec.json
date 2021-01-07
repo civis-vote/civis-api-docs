@@ -685,7 +685,11 @@
                       "data" : {
                         "type" : "array",
                         "items" : {
-                          "$ref" : "#/components/schemas/Organisation"
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/Organisation"
+                          } ]
                         }
                       }
                     }
@@ -711,14 +715,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Organisation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/OrganisationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -737,14 +734,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "updates have been accepted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Organisation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/OrganisationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -782,14 +772,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "organisation approved",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Organisation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/OrganisationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -808,14 +791,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "organisation queued for rejected",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Organisation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/OrganisationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -1015,6 +991,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/ConsultationResponse"
+              } ]
+            }
+          }
+        }
+      },
+      "OrganisationWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/Organisation"
               } ]
             }
           }
