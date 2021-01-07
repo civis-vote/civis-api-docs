@@ -493,14 +493,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/File"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/FileWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -519,14 +512,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "File updated",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/File"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/FileWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -602,14 +588,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Location"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/LocationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -628,14 +607,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "updated location",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Location"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/LocationWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -981,6 +953,34 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/ConsultationResponse"
+              } ]
+            }
+          }
+        }
+      },
+      "FileWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/File"
+              } ]
+            }
+          }
+        }
+      },
+      "LocationWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/Location"
               } ]
             }
           }
