@@ -330,7 +330,11 @@
                       "data" : {
                         "type" : "array",
                         "items" : {
-                          "$ref" : "#/components/schemas/ConsultationResponse"
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/ConsultationResponse"
+                          } ]
                         }
                       }
                     }
@@ -356,14 +360,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "created",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ConsultationResponse"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationResponseWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -382,14 +379,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "updates have been accepted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Consultation"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationResponseWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -427,14 +417,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "consultation submitted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ConsultationResponse"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationResponseWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -453,14 +436,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "consultation response voted",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ConsultationResponse"
-                }
-              }
-            }
+            "$ref" : "#/components/responses/ConsultationResponseWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -1003,7 +979,11 @@
                   "data" : {
                     "type" : "array",
                     "items" : {
-                      "$ref" : "#/components/schemas/ConsultationSummary"
+                      "allOf" : [ {
+                        "$ref" : "#/components/schemas/RecordId"
+                      }, {
+                        "$ref" : "#/components/schemas/ConsultationSummary"
+                      } ]
                     }
                   }
                 }
@@ -1017,7 +997,25 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/ConsultationSummary"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/ConsultationSummary"
+              } ]
+            }
+          }
+        }
+      },
+      "ConsultationResponseWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/ConsultationResponse"
+              } ]
             }
           }
         }
