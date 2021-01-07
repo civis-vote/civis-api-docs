@@ -1019,11 +1019,6 @@
       "BaseObject" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "readOnly" : true,
-            "type" : "integer",
-            "format" : "int64"
-          },
           "created_at" : {
             "readOnly" : true,
             "type" : "string",
@@ -1376,9 +1371,16 @@
           "type" : "object",
           "properties" : {
             "url" : {
+              "readOnly" : true,
               "type" : "string"
             },
             "base" : {
+              "readOnly" : true,
+              "type" : "string",
+              "format" : "binary"
+            },
+            "file" : {
+              "writeOnly" : true,
               "type" : "string",
               "format" : "binary"
             },
@@ -1389,7 +1391,11 @@
               "type" : "string"
             },
             "created_by" : {
-              "$ref" : "#/components/schemas/UserPublicProfile"
+              "allOf" : [ {
+                "readOnly" : true
+              }, {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              } ]
             }
           }
         } ]
@@ -1418,20 +1424,17 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/MasterReferenceDataInput"
-        } ]
-      },
-      "MasterReferenceDataInput" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Name of the reference data"
-          },
-          "reference_data_type" : {
-            "$ref" : "#/components/schemas/ReferenceDataType"
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Name of the reference data"
+            },
+            "reference_data_type" : {
+              "$ref" : "#/components/schemas/ReferenceDataType"
+            }
           }
-        }
+        } ]
       },
       "Organisation" : {
         "allOf" : [ {
@@ -1831,19 +1834,7 @@
         "content" : {
           "multipart/form-data" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "file" : {
-                  "type" : "string",
-                  "format" : "binary"
-                },
-                "title" : {
-                  "type" : "string"
-                },
-                "desc" : {
-                  "type" : "string"
-                }
-              }
+              "$ref" : "#/components/schemas/File"
             }
           }
         }
@@ -1853,22 +1844,11 @@
         "content" : {
           "multipart/form-data" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "id" : {
-                  "type" : "integer"
-                },
-                "file" : {
-                  "type" : "string",
-                  "format" : "binary"
-                },
-                "title" : {
-                  "type" : "string"
-                },
-                "desc" : {
-                  "type" : "string"
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/File"
+              } ]
             }
           }
         }
@@ -1944,7 +1924,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/MasterReferenceDataInput"
+                "$ref" : "#/components/schemas/MasterReferenceData"
               } ]
             }
           }
@@ -1983,7 +1963,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/MasterReferenceDataInput"
+                "$ref" : "#/components/schemas/MasterReferenceData"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
