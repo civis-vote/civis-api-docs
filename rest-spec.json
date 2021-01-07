@@ -1398,24 +1398,21 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/LocationInput"
-        } ]
-      },
-      "LocationInput" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Name of the location"
-          },
-          "location_type" : {
-            "$ref" : "#/components/schemas/LocationType"
-          },
-          "parent_id" : {
-            "type" : "integer",
-            "format" : "int64"
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Name of the location"
+            },
+            "location_type" : {
+              "$ref" : "#/components/schemas/LocationType"
+            },
+            "parent_id" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
           }
-        }
+        } ]
       },
       "MasterReferenceData" : {
         "allOf" : [ {
@@ -1440,58 +1437,72 @@
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
         }, {
-          "$ref" : "#/components/schemas/OrganisationInput"
-        }, {
           "type" : "object",
           "properties" : {
+            "name" : {
+              "type" : "string",
+              "description" : "Text carrying the full name of the organisation, in English"
+            },
+            "organisation_type" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }, {
+                "description" : "Type of the entity, if it is an individual or an organisation and also if it is a Government affiliated one or not"
+              } ]
+            },
+            "level" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/OrganisationLevel"
+              }, {
+                "description" : "The jurisdiction of Government that the Consultation has originated from. For Consultations not published by the Government, the category would be 'other'"
+              } ]
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/OrganisationStatus"
+            },
+            "primary_email" : {
+              "type" : "string",
+              "description" : "Email address for correspondence"
+            },
+            "secondary_email" : {
+              "type" : "string",
+              "description" : "Additional email address for correspondence"
+            },
             "created_by" : {
-              "$ref" : "#/components/schemas/UserPublicProfile"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "location" : {
-              "$ref" : "#/components/schemas/Location"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/Location"
+              }, {
+                "readOnly" : true
+              } ]
+            },
+            "location_id" : {
+              "writeOnly" : true,
+              "type" : "integer",
+              "description" : "Geographical location of the organisation"
             },
             "points_of_contact" : {
+              "readOnly" : true,
               "type" : "array",
               "items" : {
                 "$ref" : "#/components/schemas/PointOfContact"
               }
+            },
+            "domains" : {
+              "writeOnly" : true,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/ReferenceDataType"
+              }
             }
           }
         } ]
-      },
-      "OrganisationInput" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Text carrying the full name of the organisation, in English"
-          },
-          "organisation_type" : {
-            "allOf" : [ {
-              "$ref" : "#/components/schemas/ReferenceDataType"
-            }, {
-              "description" : "Type of the entity, if it is an individual or an organisation and also if it is a Government affiliated one or not"
-            } ]
-          },
-          "level" : {
-            "allOf" : [ {
-              "$ref" : "#/components/schemas/OrganisationLevel"
-            }, {
-              "description" : "The jurisdiction of Government that the Consultation has originated from. For Consultations not published by the Government, the category would be 'other'"
-            } ]
-          },
-          "status" : {
-            "$ref" : "#/components/schemas/OrganisationStatus"
-          },
-          "primary_email" : {
-            "type" : "string",
-            "description" : "Email address for correspondence"
-          },
-          "secondary_email" : {
-            "type" : "string",
-            "description" : "Additional email address for correspondence"
-          }
-        }
       },
       "PointOfContact" : {
         "allOf" : [ {
@@ -1880,7 +1891,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/LocationInput"
+                "$ref" : "#/components/schemas/Location"
               } ]
             }
           }
@@ -1919,7 +1930,7 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/LocationInput"
+                "$ref" : "#/components/schemas/Location"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
@@ -1986,21 +1997,11 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
-                "$ref" : "#/components/schemas/OrganisationInput"
+                "$ref" : "#/components/schemas/Organisation"
               }, {
                 "type" : "object",
                 "properties" : {
-                  "location_id" : {
-                    "type" : "integer",
-                    "description" : "Geographical location of the organisation"
-                  },
-                  "domains" : {
-                    "type" : "array",
-                    "items" : {
-                      "$ref" : "#/components/schemas/ReferenceDataType"
-                    }
-                  },
-                  "points_of_contact" : {
+                  "points_of_contact_attrs" : {
                     "type" : "array",
                     "items" : {
                       "$ref" : "#/components/schemas/PointOfContactInput"
