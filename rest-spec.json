@@ -955,7 +955,11 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "$ref" : "#/components/schemas/Consultation"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/Consultation"
+              } ]
             }
           }
         }
@@ -973,7 +977,11 @@
                   "data" : {
                     "type" : "array",
                     "items" : {
-                      "$ref" : "#/components/schemas/Consultation"
+                      "allOf" : [ {
+                        "$ref" : "#/components/schemas/RecordId"
+                      }, {
+                        "$ref" : "#/components/schemas/Consultation"
+                      } ]
                     }
                   }
                 }
