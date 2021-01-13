@@ -757,13 +757,169 @@
       "post" : {
         "tags" : [ "organisation" ],
         "summary" : "Reject a organisation",
-        "operationId" : "rejecOrganisation",
+        "operationId" : "rejectOrganisation",
         "requestBody" : {
           "$ref" : "#/components/requestBodies/Id"
         },
         "responses" : {
           "200" : {
             "$ref" : "#/components/responses/OrganisationWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaires/_search" : {
+      "description" : "Search organisation questionnaires using a combination of parameters",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "List organisation questionnaire",
+        "operationId" : "listOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/OrganisationQuestionnaireSearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/BasePagingResponseObject"
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/OrganisationQuestionnaire"
+                          } ]
+                        }
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_create" : {
+      "description" : "Create a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Create a organisation questionnaire",
+        "operationId" : "createOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/OrganisationQuestionnaire"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/OrganisationQuestionnaireWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_update" : {
+      "description" : "Update a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Update a organisation questionnaire",
+        "operationId" : "updateOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/OrganisationQuestionnaireUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/OrganisationQuestionnaireWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_delete" : {
+      "description" : "Delete a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Delete a organisation questionnaire",
+        "operationId" : "deleteOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "organisation questionnaire queued for deletion"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_approve" : {
+      "description" : "Approve a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Approve a organisation questionnaire",
+        "operationId" : "approveOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/OrganisationQuestionnaireWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_reject" : {
+      "description" : "Reject a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Reject a organisation questionnaire",
+        "operationId" : "rejectOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/OrganisationQuestionnaireWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/organisations/questionnaire/_archive" : {
+      "description" : "Archive a organisation questionnaire",
+      "post" : {
+        "tags" : [ "organisation" ],
+        "summary" : "Archive a organisation questionnaire",
+        "operationId" : "archiveOrganisationQuestionnaire",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/OrganisationQuestionnaireWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -995,6 +1151,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/Organisation"
+              } ]
+            }
+          }
+        }
+      },
+      "OrganisationQuestionnaireWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/OrganisationQuestionnaire"
               } ]
             }
           }
@@ -1507,6 +1677,21 @@
           }
         } ]
       },
+      "OrganisationQuestionnaire" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "name" : {
+              "type" : "string"
+            },
+            "status" : {
+              "$ref" : "#/components/schemas/OrganisationQuestionnaireStatus"
+            }
+          }
+        } ]
+      },
       "PointOfContact" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -1558,6 +1743,10 @@
       "OrganisationStatus" : {
         "type" : "string",
         "enum" : [ "approved", "rejected", "in_reivew" ]
+      },
+      "OrganisationQuestionnaireStatus" : {
+        "type" : "string",
+        "enum" : [ "draft", "approved", "rejected", "archived" ]
       },
       "OrganisationLevel" : {
         "type" : "string",
@@ -2033,6 +2222,44 @@
             "schema" : {
               "allOf" : [ {
                 "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
+            }
+          }
+        }
+      },
+      "OrganisationQuestionnaire" : {
+        "description" : "Questionnaire input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/OrganisationQuestionnaire"
+              } ]
+            }
+          }
+        }
+      },
+      "OrganisationQuestionnaireSearch" : {
+        "description" : "Organisation questionnaire search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
+            }
+          }
+        }
+      },
+      "OrganisationQuestionnaireUpdate" : {
+        "description" : "Organisation questionnaire update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/OrganisationQuestionnaire"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
               } ]
             }
           }
