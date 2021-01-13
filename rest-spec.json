@@ -1725,7 +1725,7 @@
         }
       },
       "ConsultationSummarySearch" : {
-        "description" : "Consultation summary search object",
+        "description" : "Search consultation summary using combination of parameters. If multiple parameter values are provided they will be treated as an 'and' condition for the search",
         "content" : {
           "application/json" : {
             "schema" : {
