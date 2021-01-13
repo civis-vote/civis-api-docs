@@ -1731,6 +1731,39 @@
             "schema" : {
               "allOf" : [ {
                 "$ref" : "#/components/schemas/BaseRequestObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "filters" : {
+                    "type" : "object",
+                    "properties" : {
+                      "language_id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      },
+                      "consultation_id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      },
+                      "created_by" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      },
+                      "summary_type" : {
+                        "type" : "array",
+                        "items" : {
+                          "$ref" : "#/components/schemas/SummaryType"
+                        }
+                      }
+                    }
+                  }
+                }
               } ]
             }
           }
