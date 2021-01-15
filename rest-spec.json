@@ -1006,6 +1006,132 @@
           }
         }
       }
+    },
+    "/users/_search" : {
+      "description" : "Search and filter through users",
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "List all user detail",
+        "operationId" : "listUser",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/UserSearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/BasePagingResponseObject"
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/User"
+                          } ]
+                        }
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/users/_create" : {
+      "description" : "Create user",
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Create a user",
+        "operationId" : "createUser",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/User"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/UserWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/users/_update" : {
+      "description" : "Update user details",
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Update user details",
+        "operationId" : "updateUser",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/UserUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/UserWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/users/_delete" : {
+      "description" : "Delete a user",
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Delete a user",
+        "operationId" : "deleteUser",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "user queued for deletion"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/users/_current" : {
+      "description" : "Get current user detail",
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Current user details",
+        "operationId" : "currentUser",
+        "responses" : {
+          "200" : {
+            "description" : "Request Successful",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/RecordId"
+                  }, {
+                    "$ref" : "#/components/schemas/User"
+                  } ]
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -1179,6 +1305,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/MasterReferenceData"
+              } ]
+            }
+          }
+        }
+      },
+      "UserWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/User"
               } ]
             }
           }
@@ -1688,6 +1828,42 @@
             },
             "status" : {
               "$ref" : "#/components/schemas/OrganisationQuestionnaireStatus"
+            },
+            "approved_at" : {
+              "readOnly" : true,
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "approved_by" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
+            },
+            "rejected_at" : {
+              "readOnly" : true,
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "rejected_by" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
+            },
+            "archived_at" : {
+              "readOnly" : true,
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "archived_by" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              }, {
+                "readOnly" : true
+              } ]
             }
           }
         } ]
@@ -1736,6 +1912,44 @@
             "profile_picture" : {
               "type" : "string",
               "format" : "uri"
+            }
+          }
+        } ]
+      },
+      "User" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/UserPublicProfile"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "email" : {
+              "type" : "string"
+            },
+            "email_verified_at" : {
+              "type" : "string",
+              "format" : "date-time"
+            },
+            "city_id" : {
+              "writeOnly" : true,
+              "type" : "integer"
+            },
+            "state_id" : {
+              "writeOnly" : true,
+              "type" : "integer"
+            },
+            "city" : {
+              "allOf" : [ {
+                "readOnly" : true
+              }, {
+                "$ref" : "#/components/schemas/Location"
+              } ]
+            },
+            "state" : {
+              "allOf" : [ {
+                "readOnly" : true
+              }, {
+                "$ref" : "#/components/schemas/Location"
+              } ]
             }
           }
         } ]
@@ -2258,6 +2472,44 @@
             "schema" : {
               "allOf" : [ {
                 "$ref" : "#/components/schemas/OrganisationQuestionnaire"
+              }, {
+                "$ref" : "#/components/schemas/RecordId"
+              } ]
+            }
+          }
+        }
+      },
+      "User" : {
+        "description" : "User input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/User"
+              } ]
+            }
+          }
+        }
+      },
+      "UserSearch" : {
+        "description" : "User search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
+            }
+          }
+        }
+      },
+      "UserUpdate" : {
+        "description" : "User update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/User"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
               } ]
