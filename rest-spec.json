@@ -2498,6 +2498,27 @@
             "schema" : {
               "allOf" : [ {
                 "$ref" : "#/components/schemas/BaseRequestObject"
+              }, {
+                "type" : "object",
+                "properties" : {
+                  "filters" : {
+                    "type" : "object",
+                    "properties" : {
+                      "city_id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      },
+                      "state_id" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "integer"
+                        }
+                      }
+                    }
+                  }
+                }
               } ]
             }
           }
