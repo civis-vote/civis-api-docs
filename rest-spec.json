@@ -1937,10 +1937,6 @@
               "writeOnly" : true,
               "type" : "integer"
             },
-            "state_id" : {
-              "writeOnly" : true,
-              "type" : "integer"
-            },
             "city" : {
               "allOf" : [ {
                 "readOnly" : true
