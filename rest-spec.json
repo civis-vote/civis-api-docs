@@ -1827,7 +1827,11 @@
               "type" : "string"
             },
             "status" : {
-              "$ref" : "#/components/schemas/OrganisationQuestionnaireStatus"
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/OrganisationQuestionnaireStatus"
+              }, {
+                "readOnly" : true
+              } ]
             },
             "approved_at" : {
               "readOnly" : true,
