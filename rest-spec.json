@@ -1007,6 +1007,25 @@
         }
       }
     },
+    "/surveys/_create" : {
+      "description" : "Create a survey",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Create a survey",
+        "operationId" : "createSurvey",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Survey"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/users/_search" : {
       "description" : "Search and filter through users",
       "post" : {
@@ -1305,6 +1324,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/MasterReferenceData"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/Survey"
               } ]
             }
           }
@@ -1901,6 +1934,50 @@
           }
         }
       },
+      "Survey" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "title" : {
+              "type" : "string"
+            },
+            "surveyable_id" : {
+              "type" : "integer",
+              "writeOnly" : true
+            },
+            "surveyable_type" : {
+              "type" : "string",
+              "writeOnly" : true
+            },
+            "surveyable" : {
+              "readOnly" : true,
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/Consultation"
+              }, {
+                "$ref" : "#/components/schemas/Organisation"
+              } ]
+            },
+            "surveyorable_id" : {
+              "type" : "integer",
+              "writeOnly" : true
+            },
+            "surveyorable_type" : {
+              "type" : "string",
+              "writeOnly" : true
+            },
+            "surveyorable" : {
+              "readOnly" : true,
+              "oneOf" : [ {
+                "$ref" : "#/components/schemas/Organisation"
+              }, {
+                "$ref" : "#/components/schemas/UserPublicProfile"
+              } ]
+            }
+          }
+        } ]
+      },
       "UserPublicProfile" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -2474,6 +2551,18 @@
                 "$ref" : "#/components/schemas/OrganisationQuestionnaire"
               }, {
                 "$ref" : "#/components/schemas/RecordId"
+              } ]
+            }
+          }
+        }
+      },
+      "Survey" : {
+        "description" : "Survey input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/Survey"
               } ]
             }
           }
