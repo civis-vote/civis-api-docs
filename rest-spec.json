@@ -2049,6 +2049,21 @@
             "survey_id" : {
               "writeOnly" : true,
               "type" : "integer"
+            },
+            "options" : {
+              "writeOnly" : true,
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "integer"
+                  },
+                  "title" : {
+                    "type" : "string"
+                  }
+                }
+              }
             }
           }
         } ]
