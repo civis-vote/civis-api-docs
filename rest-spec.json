@@ -1026,6 +1026,44 @@
         }
       }
     },
+    "/surveys/questions/_create" : {
+      "description" : "Create a survey question",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Create a survey question",
+        "operationId" : "createSurveyQuestion",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/SurveyQuestion"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyQuestionWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/surveys/responses/_create" : {
+      "description" : "Create a survey response",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Create a survey response",
+        "operationId" : "createSurveyResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/SurveyResponse"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "response submitted successfully."
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/users/_search" : {
       "description" : "Search and filter through users",
       "post" : {
@@ -1324,6 +1362,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/MasterReferenceData"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyQuestionWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/SurveyQuestion"
               } ]
             }
           }
@@ -1978,6 +2030,29 @@
           }
         } ]
       },
+      "SurveyQuestion" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "title" : {
+              "type" : "string"
+            },
+            "question_type" : {
+              "$ref" : "#/components/schemas/SurveyQuestionType"
+            },
+            "parent_id" : {
+              "writeOnly" : true,
+              "type" : "integer"
+            },
+            "survey_id" : {
+              "writeOnly" : true,
+              "type" : "integer"
+            }
+          }
+        } ]
+      },
       "UserPublicProfile" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -2070,6 +2145,10 @@
       "LocationType" : {
         "type" : "string",
         "enum" : [ "city", "state" ]
+      },
+      "SurveyQuestionType" : {
+        "type" : "string",
+        "enum" : [ "text", "paragraph", "dichotomous", "attachment", "checkbox", "multichoice" ]
       },
       "ReferenceDataType" : {
         "type" : "string",
@@ -2564,6 +2643,47 @@
               "allOf" : [ {
                 "$ref" : "#/components/schemas/Survey"
               } ]
+            }
+          }
+        }
+      },
+      "SurveyQuestion" : {
+        "description" : "Survey question input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/SurveyQuestion"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyResponse" : {
+        "description" : "Survey response input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "survey_id" : {
+                  "type" : "integer"
+                },
+                "answers" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "question_id" : {
+                        "type" : "string"
+                      },
+                      "answer" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
