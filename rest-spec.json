@@ -1026,6 +1026,48 @@
         }
       }
     },
+    "/surveys/_search" : {
+      "description" : "Search and filter through surveys",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "List all survey",
+        "operationId" : "listSurvey",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/SurveySearch"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/BasePagingResponseObject"
+                  }, {
+                    "type" : "object",
+                    "properties" : {
+                      "data" : {
+                        "type" : "array",
+                        "items" : {
+                          "allOf" : [ {
+                            "$ref" : "#/components/schemas/RecordId"
+                          }, {
+                            "$ref" : "#/components/schemas/Survey"
+                          } ]
+                        }
+                      }
+                    }
+                  } ]
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/surveys/questions/_create" : {
       "description" : "Create a survey question",
       "post" : {
@@ -2699,6 +2741,18 @@
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      "SurveySearch" : {
+        "description" : "Survey search object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/BaseRequestObject"
+              } ]
             }
           }
         }
