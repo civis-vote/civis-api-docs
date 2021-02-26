@@ -2068,9 +2068,27 @@
               }, {
                 "$ref" : "#/components/schemas/UserPublicProfile"
               } ]
+            },
+            "survey_questions" : {
+              "readOnly" : true,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/SurveyQuestion"
+              }
             }
           }
         } ]
+      },
+      "SurveySubQuestion" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        }
       },
       "SurveyQuestion" : {
         "allOf" : [ {
@@ -2105,6 +2123,13 @@
                     "type" : "string"
                   }
                 }
+              }
+            },
+            "sub_options" : {
+              "readOnly" : true,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/components/schemas/SurveySubQuestion"
               }
             }
           }
