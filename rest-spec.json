@@ -1212,7 +1212,26 @@
         },
         "responses" : {
           "200" : {
-            "description" : "response submitted successfully."
+            "$ref" : "#/components/responses/SurveyResponseWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
+    "/surveys/responses/_update" : {
+      "description" : "Update a survey response",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Update a survey response",
+        "operationId" : "updateSurveyResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/SurveyResponseUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyResponseWrite"
           },
           "default" : {
             "$ref" : "#/components/responses/DefaultError"
@@ -1546,6 +1565,20 @@
                 "$ref" : "#/components/schemas/RecordId"
               }, {
                 "$ref" : "#/components/schemas/Survey"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyResponseWrite" : {
+        "description" : "Accepted, operation queued for execution.",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/SurveyResponse"
               } ]
             }
           }
@@ -2249,6 +2282,32 @@
           }
         } ]
       },
+      "SurveyResponse" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/BaseObject"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "survey_id" : {
+              "type" : "integer"
+            },
+            "answers" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "question_id" : {
+                    "type" : "string"
+                  },
+                  "answer" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        } ]
+      },
       "UserPublicProfile" : {
         "allOf" : [ {
           "$ref" : "#/components/schemas/BaseObject"
@@ -2888,26 +2947,23 @@
         "content" : {
           "application/json" : {
             "schema" : {
-              "type" : "object",
-              "properties" : {
-                "survey_id" : {
-                  "type" : "integer"
-                },
-                "answers" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "properties" : {
-                      "question_id" : {
-                        "type" : "string"
-                      },
-                      "answer" : {
-                        "type" : "string"
-                      }
-                    }
-                  }
-                }
-              }
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/SurveyResponse"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyResponseUpdate" : {
+        "description" : "Survey response update input object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
+                "$ref" : "#/components/schemas/SurveyResponse"
+              } ]
             }
           }
         }
