@@ -1064,6 +1064,25 @@
         }
       }
     },
+    "/surveys/_publish" : {
+      "description" : "Publish a survey and accept responses",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Publish survey",
+        "operationId" : "publishSurvey",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/surveys/_search" : {
       "description" : "Search and filter through surveys",
       "post" : {
