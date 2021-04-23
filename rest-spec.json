@@ -1026,6 +1026,25 @@
         }
       }
     },
+    "/surveys/_update" : {
+      "description" : "Update a survey",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Update a survey",
+        "operationId" : "updateSurvey",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/SurveyUpdate"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/surveys/_search" : {
       "description" : "Search and filter through surveys",
       "post" : {
@@ -2723,6 +2742,20 @@
           "application/json" : {
             "schema" : {
               "allOf" : [ {
+                "$ref" : "#/components/schemas/Survey"
+              } ]
+            }
+          }
+        }
+      },
+      "SurveyUpdate" : {
+        "description" : "Survey update object",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "allOf" : [ {
+                "$ref" : "#/components/schemas/RecordId"
+              }, {
                 "$ref" : "#/components/schemas/Survey"
               } ]
             }
