@@ -1083,6 +1083,25 @@
         }
       }
     },
+    "/surveys/_unpublish" : {
+      "description" : "Unpublish a survey and close it for responses",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Unpublish survey",
+        "operationId" : "unpublishSurvey",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "$ref" : "#/components/responses/SurveyWrite"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/surveys/_search" : {
       "description" : "Search and filter through surveys",
       "post" : {
