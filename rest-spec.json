@@ -1239,6 +1239,25 @@
         }
       }
     },
+    "/surveys/responses/_delete" : {
+      "description" : "Delete a survey response",
+      "post" : {
+        "tags" : [ "survey" ],
+        "summary" : "Delete a survey response",
+        "operationId" : "deleteSurveyResponse",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Id"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "survey response queued for deletion"
+          },
+          "default" : {
+            "$ref" : "#/components/responses/DefaultError"
+          }
+        }
+      }
+    },
     "/users/_search" : {
       "description" : "Search and filter through users",
       "post" : {
